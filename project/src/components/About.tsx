@@ -46,7 +46,7 @@ const About: React.FC = () => {
           <div className="relative z-10">
             <div className="relative z-10">
               <img 
-                src={img1}
+                src="https://drive.google.com/file/d/19WOqm9AtAhhO7abLprQ0CWlCYCb3br7d/view?usp=sharing"
                 alt="Parthasarathy"
                 className="w-full max-w-md mx-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500 border-2 border-cyan-500/30"
               />
