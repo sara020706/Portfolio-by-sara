@@ -1,5 +1,6 @@
 import React from 'react';
 import { Code, Palette, Zap, Heart } from 'lucide-react';
+import Img1 from './assets/img1.jpg';
 
 const About: React.FC = () => {
   const skills = [

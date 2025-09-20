@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features a stunning dark theme with smooth animations, interactive components, and professional presentation of skills, projects, and certifications.
 
-![Portfolio Preview](project\src\assets\img2.PNG)
+
 
 ## ✨ Features
 
@@ -221,10 +221,10 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 ## 📞 Contact
 
 **Alex Johnson**
-- Email: alex@example.com
-- LinkedIn: [linkedin.com/in/alexjohnson](https://www.linkedin.com/in/parthasarthy-e-48019a327)
-- GitHub: [github.com/alexjohnson](https://github.com/sara020706)
-- Portfolio: [alexjohnson.dev](https://alexjohnson.dev)
+- Email: ps2601296@gmail.com
+- LinkedIn: [linkedin.com/in/parthasarathy e](https://www.linkedin.com/in/parthasarthy-e-48019a327)
+- GitHub: [github.com/sara020706](https://github.com/sara020706)
+- Portfolio: [EParthasarathy.dev](https://portfolio-by-sara.vercel.app/)
 
 ---
 
