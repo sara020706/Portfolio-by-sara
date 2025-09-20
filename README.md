@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features a stunning dark theme with smooth animations, interactive components, and professional presentation of skills, projects, and certifications.
 
-![Portfolio Preview](https://portfolio-by-sara.vercel.app/)
+
 
 ## ✨ Features
 
