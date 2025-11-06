@@ -48,7 +48,33 @@ function App() {
   };
 
   return (
-    <div className={`${isDark ? 'dark' : ''} transition-colors duration-300`}>
+    <div className={`${isDark ? 'dark' : 'not-dark'} transition-colors duration-300`}>
+      {/* Scrollbar styles matching black + red theme */}
+      <style>{`
+        /* WebKit browsers */
+        .dark ::-webkit-scrollbar-track { background: rgba(15,23,42,0.6); }
+        .dark ::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg,#fb7185 0%, #ef4444 100%);
+          border-radius: 9999px;
+          border: 3px solid rgba(0,0,0,0);
+          background-clip: padding-box;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover { filter: brightness(0.95); }
+
+        /* Firefox */
+        .dark { scrollbar-color: #ef4444 rgba(15,23,42,0.6); }
+
+        /* Light / not-dark fallback */
+        .not-dark ::-webkit-scrollbar-track { background: rgba(243,244,246,0.6); }
+        .not-dark ::-webkit-scrollbar-thumb {
+          background: linear-gradient(180deg,#94a3b8 0%, #64748b 100%);
+          border-radius: 9999px;
+          border: 3px solid rgba(255,255,255,0);
+          background-clip: padding-box;
+        }
+        .not-dark { scrollbar-color: #64748b rgba(243,244,246,0.6); }
+      `}</style>
+
       <div className={`min-h-screen transition-colors duration-300 ${
         isDark 
           ? 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900' 

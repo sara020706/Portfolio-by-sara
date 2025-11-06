@@ -45,11 +45,11 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative">
+    <section id="contact" className="py-20 bg-gradient-to-br from-slate-900 via-red-900 to-rose-900 relative">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-tr from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-20 w-80 h-80 bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-tr from-rose-400/20 to-red-500/20 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,30 +71,30 @@ const Contact: React.FC = () => {
               </h3>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-cyan-500/20 border border-cyan-500/30 rounded-lg">
-                    <Mail size={24} className="text-cyan-400" />
+                  <div className="p-3 bg-rose-500/20 border border-rose-500/30 rounded-lg">
+                    <Mail size={24} className="text-rose-400" />
                   </div>
                   <div>
                     <p className="font-medium text-white">Email</p>
-                    <a href="mailto:alex@example.com" className="text-gray-300 hover:text-cyan-400 transition-colors">
+                    <a href="mailto:alex@example.com" className="text-gray-300 hover:text-rose-400 transition-colors">
                       ps2601296@gmail.com
                     </a>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-emerald-500/20 border border-emerald-500/30 rounded-lg">
-                    <Phone size={24} className="text-emerald-400" />
+                  <div className="p-3 bg-rose-500/20 border border-rose-500/30 rounded-lg">
+                    <Phone size={24} className="text-rose-400" />
                   </div>
                   <div>
                     <p className="font-medium text-white">Phone</p>
-                    <a href="tel:+1234567890" className="text-gray-300 hover:text-emerald-400 transition-colors">
+                    <a href="tel:+1234567890" className="text-gray-300 hover:text-rose-400 transition-colors">
                       +91 9361162117
                     </a>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-purple-500/20 border border-purple-500/30 rounded-lg">
-                    <MapPin size={24} className="text-purple-400" />
+                  <div className="p-3 bg-rose-500/20 border border-rose-500/30 rounded-lg">
+                    <MapPin size={24} className="text-rose-400" />
                   </div>
                   <div>
                     <p className="font-medium text-white">Location</p>
@@ -107,7 +107,7 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Availability */}
-            <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl p-8 text-white shadow-2xl border border-emerald-400/30">
+            <div className="bg-gradient-to-r from-red-700 to-rose-600 rounded-2xl p-8 text-white shadow-2xl border border-rose-400/30">
               <h4 className="text-xl font-bold mb-2">Available for New Projects</h4>
               <p className="opacity-90">
                 I'm currently accepting new freelance projects and collaborations. Let's build something amazing together!
@@ -122,9 +122,9 @@ const Contact: React.FC = () => {
             </h3>
 
             {isSubmitted && (
-              <div className="mb-6 p-4 bg-emerald-500/20 border border-emerald-500/30 rounded-lg flex items-center gap-2">
-                <CheckCircle size={20} className="text-emerald-400" />
-                <p className="text-emerald-300 font-medium">
+              <div className="mb-6 p-4 bg-rose-500/20 border border-rose-500/30 rounded-lg flex items-center gap-2">
+                <CheckCircle size={20} className="text-rose-400" />
+                <p className="text-rose-300 font-medium">
                   ✅ Thank you! Your message has been sent successfully.
                 </p>
               </div>
@@ -142,7 +142,7 @@ const Contact: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-slate-600/50 bg-slate-700/30 backdrop-blur-sm text-white rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors duration-200 placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-slate-600/50 bg-slate-700/30 backdrop-blur-sm text-white rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors duration-200 placeholder-gray-400"
                   placeholder="John Doe"
                 />
               </div>
@@ -157,7 +157,7 @@ const Contact: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-slate-600/50 bg-slate-700/30 backdrop-blur-sm text-white rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors duration-200 placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-slate-600/50 bg-slate-700/30 backdrop-blur-sm text-white rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors duration-200 placeholder-gray-400"
                   placeholder="john@example.com"
                 />
               </div>
@@ -172,13 +172,13 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full px-4 py-3 border border-slate-600/50 bg-slate-700/30 backdrop-blur-sm text-white rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors duration-200 resize-none placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-slate-600/50 bg-slate-700/30 backdrop-blur-sm text-white rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 transition-colors duration-200 resize-none placeholder-gray-400"
                   placeholder="Tell me about your project..."
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="w-full group px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:from-cyan-400 hover:to-blue-500 transform hover:scale-[1.02] transition-all duration-300 shadow-2xl hover:shadow-cyan-500/25 border border-cyan-400/20"
+                className="w-full group px-6 py-4 bg-gradient-to-r from-red-500 to-rose-600 text-white font-semibold rounded-lg hover:from-red-600 hover:to-rose-500 transform hover:scale-[1.02] transition-all duration-300 shadow-2xl hover:shadow-rose-500/25 border border-rose-400/20"
               >
                 <span className="flex items-center justify-center gap-2">
                   Send Message
