@@ -24,7 +24,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 relative bg-gradient-to-br from-slate-900 via-red-900 to-rose-900">
+    <section id="about" className="py-20 relative bg-gradient-to-b from-[#3B1E54] via-[#1F0A3A] to-[#3B1E54] border-t border-purple-500/20">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-full blur-3xl"></div>
@@ -42,7 +42,7 @@ Beyond development, I’m someone who thrives on learning and exploring new tech
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Profile Image */}
-          <div className="relative z-10">
+          <div className="relative">
             <div className="relative z-10">
               <img 
                 src="/img1.jpg"

@@ -42,7 +42,7 @@ const Projects: React.FC = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-br from-slate-900 via-red-900 to-rose-900 relative">
+    <section id="projects" className="py-20 bg-gradient-to-b from-[#3B1E54] via-[#1F0A3A] to-[#3B1E54] relative border-t border-purple-500/20">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-40 right-40 w-80 h-80 bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-full blur-3xl"></div>

@@ -7,28 +7,18 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden dark:bg-gradient-to-br dark:from-slate-900 dark:via-red-900 dark:to-slate-900 bg-gradient-to-br from-rose-50 via-red-50 to-rose-50">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-32 w-80 h-80 bg-gradient-to-br from-rose-400 to-red-600 rounded-full dark:opacity-30 opacity-20 animate-pulse blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-red-400 to-rose-500 rounded-full dark:opacity-30 opacity-20 animate-pulse delay-1000 blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-red-500/20 to-rose-500/20 rounded-full blur-3xl animate-pulse delay-500"></div>
-      </div>
-
-      <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#0D1117] via-[#1F0A3A] to-[#3B1E54] pt-16">
+      <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-8">
           {/* Main Heading */}
-          <br></br>
-          <br></br>
-          <br></br>
-          <div className="space-y-4">
-            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold dark:text-white text-gray-900 leading-tight">
-              <span className="block">Hi, I'm</span>
-              <span className="block bg-gradient-to-r from-rose-400 via-red-500 to-rose-600 bg-clip-text text-transparent animate-pulse drop-shadow-2xl">
+          <div className="space-y-6">
+            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold dark:text-white text-gray-900 leading-tight pb-4">
+              <span className="block mb-2">Hi, I'm</span>
+              <span className="block bg-gradient-to-r from-rose-400 via-red-500 to-rose-600 bg-clip-text text-transparent animate-pulse drop-shadow-2xl pb-6">
                 Parthasarathy E 
               </span>
             </h1>
-            <p className="text-xl sm:text-2xl dark:text-gray-300 text-gray-600 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
+            <p className="text-xl sm:text-2xl dark:text-gray-300 text-gray-600 max-w-3xl mx-auto leading-relaxed drop-shadow-lg mt-8">
 🚀 Full-Stack Developer | ☁️ Cloud Enthusiast | 🤖 AI & Data Science Explorer
 I build smart, scalable, and meaningful digital solutions that connect innovation with real-world impact. With a passion for technology and cloud systems, I turn data-driven ideas into smooth, efficient applications that work beautifully behind the scenes.            </p>
           </div>
@@ -67,12 +57,9 @@ I build smart, scalable, and meaningful digital solutions that connect innovatio
             >
               <Mail size={24} />
             </a>
-            <br></br>
           </div>
         </div>
       </div>
-
-      
     </section>
   );
 };

@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-black via-slate-900 to-rose-950 text-white py-12 border-t border-slate-800/50">
+    <footer className="relative bg-gradient-to-b from-[#0D1117] via-[#1F0A3A] to-[#3B1E54] text-white py-12 border-t border-purple-500/20">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-32 bg-gradient-to-r from-red-800/10 via-rose-600/8 to-red-900/6 blur-3xl"></div>

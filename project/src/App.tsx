@@ -3,6 +3,9 @@ import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
 import Certifications from './components/Certifications';
+import Badges from './components/Badges';
+import Internships from './components/Internships';
+import Codolio from './components/Codolio';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -16,7 +19,7 @@ function App() {
     document.documentElement.classList.add('dark');
     
     const handleScroll = () => {
-      const sections = ['home', 'about', 'certifications', 'projects', 'contact'];
+      const sections = ['home', 'about', 'certifications', 'badges', 'internships', 'codolio', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       sections.forEach(section => {
@@ -88,6 +91,9 @@ function App() {
         <Hero />
         <About />
         <Certifications />
+        <Badges />
+        <Internships />
+        <Codolio />
         <Projects />
         <Contact />
         <Footer />
