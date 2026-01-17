@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Corner3D: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -59,14 +60,26 @@ const Corner3D: React.FC = () => {
     <div
       ref={containerRef}
       aria-hidden
-      className="fixed right-6 bottom-6 z-50 hidden md:block"
-      style={{ width: 112, height: 112 }}
+      className="fixed right-6 bottom-6 z-50 hidden md:block group"
+      style={{ width: 112, height: 140 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Thank you message - appears on hover */}
+      <div 
+        className={`absolute -top-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-rose-500 to-red-500 text-white text-xs font-semibold rounded-full shadow-lg whitespace-nowrap transition-all duration-300 ${
+          isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+        }`}
+      >
+        Thank you for visiting!💖
+      </div>
+
       {/* Perspective wrapper */}
       <div
+        className="mt-6"
         style={{
           width: '100%',
-          height: '100%',
+          height: 112,
           perspective: 700,
           WebkitPerspective: 700,
         }}
