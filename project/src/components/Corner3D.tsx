@@ -71,7 +71,7 @@ const Corner3D: React.FC = () => {
           isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
         }`}
       >
-        Thank you! �
+        Thank you! 
       </div>
 
       {/* Perspective wrapper */}
