@@ -67,11 +67,11 @@ const Corner3D: React.FC = () => {
     >
       {/* Thank you message - appears on hover */}
       <div 
-        className={`absolute -top-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-rose-500 to-red-500 text-white text-xs font-semibold rounded-full shadow-lg whitespace-nowrap transition-all duration-300 ${
+        className={`absolute -top-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-cyan-500 to-teal-500 text-white text-xs font-semibold rounded-full shadow-lg whitespace-nowrap transition-all duration-300 ${
           isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
         }`}
       >
-        Thank you for visiting!💖
+        Thank you! �
       </div>
 
       {/* Perspective wrapper */}

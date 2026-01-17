@@ -27,11 +27,11 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#0D1117]/95 backdrop-blur-md border-b border-purple-500/30 shadow-lg shadow-purple-900/20">
+    <nav className="fixed top-0 w-full z-50 bg-[#0a0f1a]/95 backdrop-blur-md border-b border-cyan-500/30 shadow-lg shadow-cyan-900/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold bg-gradient-to-r from-rose-400 via-red-500 to-rose-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-teal-500 to-cyan-600 bg-clip-text text-transparent">
               Portfolio
             </span>
           </div>
@@ -46,7 +46,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-2 text-sm font-medium rounded-lg border transition-all duration-300 text-rose-200 border-transparent hover:bg-red-900/10 hover:text-rose-100"
+                    className="px-3 py-2 text-sm font-medium rounded-lg border transition-all duration-300 text-cyan-200 border-transparent hover:bg-cyan-900/10 hover:text-cyan-100"
                   >
                     {item.name}
                   </a>
@@ -56,8 +56,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
                     onClick={() => scrollToSection(item.href)}
                     className={`px-3 py-2 text-sm font-medium rounded-lg border transition-all duration-300 ${
                       activeSection === item.href.slice(1)
-                        ? 'text-white bg-red-900/60 border-red-800/40'
-                        : 'text-rose-200 border-transparent hover:bg-red-900/10 hover:text-rose-100'
+                        ? 'text-white bg-cyan-900/60 border-cyan-800/40'
+                        : 'text-cyan-200 border-transparent hover:bg-cyan-900/10 hover:text-cyan-100'
                     }`}
                   >
                     {item.name}
@@ -71,7 +71,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg bg-slate-900/50 border border-red-900/30 text-rose-200 hover:bg-red-900/10"
+              className="md:hidden p-2 rounded-lg bg-slate-900/50 border border-cyan-900/30 text-cyan-200 hover:bg-cyan-900/10"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -82,7 +82,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-[#0D1117]/95 backdrop-blur-md border-t border-purple-500/30">
+        <div className="md:hidden bg-[#0a0f1a]/95 backdrop-blur-md border-t border-cyan-500/30">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navItems.map((item) => (
               item.external ? (
@@ -91,7 +91,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-left px-3 py-2 text-base font-medium rounded-lg border transition-all duration-300 text-rose-200 border-transparent hover:bg-red-900/10"
+                  className="block w-full text-left px-3 py-2 text-base font-medium rounded-lg border transition-all duration-300 text-cyan-200 border-transparent hover:bg-cyan-900/10"
                 >
                   {item.name}
                 </a>
@@ -101,8 +101,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
                   onClick={() => scrollToSection(item.href)}
                   className={`block w-full text-left px-3 py-2 text-base font-medium rounded-lg border transition-all duration-300 ${
                     activeSection === item.href.slice(1)
-                      ? 'text-white bg-red-900/60 border-red-800/40'
-                      : 'text-rose-200 border-transparent hover:bg-red-900/10'
+                      ? 'text-white bg-cyan-900/60 border-cyan-800/40'
+                      : 'text-cyan-200 border-transparent hover:bg-cyan-900/10'
                   }`}
                 >
                   {item.name}

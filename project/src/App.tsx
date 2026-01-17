@@ -41,12 +41,12 @@ function App() {
 
   return (
     <div className="dark transition-colors duration-300">
-      {/* Scrollbar styles matching black + red theme */}
+      {/* Scrollbar styles matching ocean blue + cyan theme */}
       <style>{`
         /* WebKit browsers */
-        .dark ::-webkit-scrollbar-track { background: rgba(15,23,42,0.6); }
+        .dark ::-webkit-scrollbar-track { background: rgba(10,15,26,0.6); }
         .dark ::-webkit-scrollbar-thumb {
-          background: linear-gradient(180deg,#fb7185 0%, #ef4444 100%);
+          background: linear-gradient(180deg,#22d3ee 0%, #06b6d4 100%);
           border-radius: 9999px;
           border: 3px solid rgba(0,0,0,0);
           background-clip: padding-box;
@@ -54,10 +54,10 @@ function App() {
         .dark ::-webkit-scrollbar-thumb:hover { filter: brightness(0.95); }
 
         /* Firefox */
-        .dark { scrollbar-color: #ef4444 rgba(15,23,42,0.6); }
+        .dark { scrollbar-color: #06b6d4 rgba(10,15,26,0.6); }
       `}</style>
 
-      <div className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-[#0a0f1a] via-[#0c1929] to-[#0a0f1a]">
         <Navigation activeSection={activeSection} />
         <Hero />
         <About />

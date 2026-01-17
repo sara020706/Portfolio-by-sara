@@ -10,7 +10,7 @@ const Projects: React.FC = () => {
       tags: ['Django 5.2','HTML','TailwindCSS','Python 3.13'],
       github: 'https://github.com/sara020706/amortization-table',
       live: 'https://amortization-table.onrender.com/',
-      color: 'from-rose-500 to-red-500'
+      color: 'from-cyan-500 to-teal-500'
     },
     {
       title: 'Day-Wise',
@@ -19,7 +19,7 @@ const Projects: React.FC = () => {
       tags: ['React', 'TypeScript', 'Capacitor', 'Tailwind CSS'],
       github: 'https://github.com/sara020706/Day-Wise',
       live: 'https://github.com/sara020706/Day-Wise',
-      color: 'from-rose-400 to-rose-600'
+      color: 'from-cyan-400 to-cyan-600'
     },
     {
       title: 'Focus Sense',
@@ -28,7 +28,7 @@ const Projects: React.FC = () => {
       tags: ['React 18 + TypeScript + Vite','Tailwind CSS','Lucide React','React Router','Capacitor','SQLite (Android) + IndexedDB (Web)','React Context + useReducer'],
       github: 'https://github.com/sara020706/focus-sense',
       live: 'https://github.com/sara020706/focus-sense',
-      color: 'from-red-500 to-rose-500'
+      color: 'from-teal-500 to-cyan-500'
     },
     {
       title: 'Flames-By--Sara',
@@ -37,16 +37,16 @@ const Projects: React.FC = () => {
       tags: ['React 18 (with Vite) ⚡','TailwindCSS 🎨','Lucide React (for icons) 🔥'],
       github: 'https://github.com/sara020706/Flames-By--Sara',
       live: 'https://flames-by-sara.vercel.app/',
-      color: 'from-rose-500 to-red-500'
+      color: 'from-cyan-500 to-teal-500'
     }
   ];
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-[#3B1E54] via-[#1F0A3A] to-[#3B1E54] relative border-t border-purple-500/20">
+    <section id="projects" className="py-20 bg-gradient-to-b from-[#0d2137] via-[#0c1929] to-[#0d2137] relative border-t border-cyan-500/20">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-40 right-40 w-80 h-80 bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 left-40 w-96 h-96 bg-gradient-to-tr from-rose-400/20 to-red-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-40 right-40 w-80 h-80 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 left-40 w-96 h-96 bg-gradient-to-tr from-cyan-400/20 to-teal-500/20 rounded-full blur-3xl"></div>
       </div>
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,7 +63,7 @@ const Projects: React.FC = () => {
           {projects.map((project, index) => (
             <div 
               key={index}
-              className="group bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl hover:shadow-rose-500/20 transition-all duration-500 hover:transform hover:scale-[1.02] hover:border-rose-500/30"
+              className="group bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:transform hover:scale-[1.02] hover:border-cyan-500/30"
             >
               {/* Project Image */}
               <div className="relative overflow-hidden">
@@ -79,7 +79,7 @@ const Projects: React.FC = () => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-slate-900/90 backdrop-blur-sm border border-slate-600 rounded-lg hover:bg-slate-800 transition-colors duration-200 text-white hover:text-rose-400"
+                    className="p-2 bg-slate-900/90 backdrop-blur-sm border border-slate-600 rounded-lg hover:bg-slate-800 transition-colors duration-200 text-white hover:text-cyan-400"
                   >
                     <Github size={20} />
                   </a>
@@ -87,7 +87,7 @@ const Projects: React.FC = () => {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 bg-slate-900/90 backdrop-blur-sm border border-slate-600 rounded-lg hover:bg-slate-800 transition-colors duration-200 text-white hover:text-rose-400"
+                    className="p-2 bg-slate-900/90 backdrop-blur-sm border border-slate-600 rounded-lg hover:bg-slate-800 transition-colors duration-200 text-white hover:text-cyan-400"
                   >
                     <ExternalLink size={20} />
                   </a>
@@ -96,7 +96,7 @@ const Projects: React.FC = () => {
 
               {/* Project Content */}
               <div className="p-6 space-y-4">
-                <h3 className="text-xl font-bold text-white group-hover:text-rose-400 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">
                   {project.title}
                 </h3>
                 <p className="text-gray-300 leading-relaxed">
@@ -108,7 +108,7 @@ const Projects: React.FC = () => {
                   {project.tags.map((tag) => (
                     <span 
                       key={tag}
-                      className="px-3 py-1 bg-slate-700/50 border border-slate-600/50 text-rose-300 rounded-full text-sm font-medium hover:bg-rose-500/10 hover:border-rose-400/50 transition-all duration-200"
+                      className="px-3 py-1 bg-slate-700/50 border border-slate-600/50 text-cyan-300 rounded-full text-sm font-medium hover:bg-cyan-500/10 hover:border-cyan-400/50 transition-all duration-200"
                     >
                       {tag}
                     </span>
@@ -121,7 +121,7 @@ const Projects: React.FC = () => {
                     href={project.live}
                     target="https://github.com"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-rose-400 font-medium hover:gap-3 transition-all duration-300 hover:text-rose-300"
+                    className="inline-flex items-center gap-2 text-cyan-400 font-medium hover:gap-3 transition-all duration-300 hover:text-cyan-300"
                   >
                     View Project
                     <ArrowRight size={16} />
@@ -138,7 +138,7 @@ const Projects: React.FC = () => {
             href="https://github.com/sara020706"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-700 to-rose-600 border border-rose-400/20 text-white font-semibold rounded-xl hover:from-red-600 hover:to-rose-500 hover:border-rose-500/50 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-rose-500/20 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-teal-700 to-cyan-600 border border-cyan-400/20 text-white font-semibold rounded-xl hover:from-teal-600 hover:to-cyan-500 hover:border-cyan-500/50 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-cyan-500/20 backdrop-blur-sm"
           >
             View All Projects
             <Github size={20} />

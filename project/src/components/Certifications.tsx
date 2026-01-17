@@ -11,7 +11,7 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/116lKGOQtmzyBZRf_zyAykcjgx9Qxdc1R/view?usp=drive_link',
       verificationUrl: 'https://www.credly.com/badges/2724893a-3e9b-4f86-9e63-0eb571c884d7',
       description: 'Demonstrates basic understanding of data analytics in cloud',
-      color: 'from-red-500 to-rose-500',
+      color: 'from-teal-500 to-cyan-500',
       logoUrl: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlecloud.svg'
     },
     {
@@ -22,7 +22,7 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/1BpV0Jt_CFxXTzmo-uyqJwx2n_kGk-Uty/view?usp=drive_link',
       verificationUrl: 'https://www.linkedin.com/learning/certificates/2906edea526205ae1f250bbbba2750ddfd33390feb50f40fcb40aff58419ecfb?trk=share_certificate',
       description: 'Validates skills in cyber security',
-      color: 'from-rose-500 to-red-600',
+      color: 'from-cyan-500 to-teal-600',
       logoUrl: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoft.svg'
     },
     {
@@ -33,7 +33,7 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/1C15ap7DF7GhTcNy0_F4rm-lpBP_aj9QZ/view?usp=drive_link',
       verificationUrl: 'https://www.credly.com/badges/d176ad0d-8191-44f8-9fa5-c67c4229eada',
       description: 'Comprehensive program covering basics of modern AI',
-      color: 'from-red-500 to-rose-600',
+      color: 'from-teal-500 to-cyan-600',
       logoUrl: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/cisco.svg'
     },
     {
@@ -44,7 +44,7 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/1nYmKn1Olc_euwrligracukCz7TMBduUO/view?usp=drive_link',
       verificationUrl: 'https://www.credly.com/badges/c428971b-d593-49cb-98d3-d96006ad5eb9',
       description: 'Intro to the basics of datascience and its related roles',
-      color: 'from-rose-400 to-red-500',
+      color: 'from-cyan-400 to-teal-500',
       logoUrl: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/cisco.svg'
     },
     {
@@ -55,7 +55,7 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/17vqKkJqe0rHKC0lnVLZGoPE06uNDUATm/view?usp=drive_link',
       verificationUrl: 'https://www.credly.com/badges/fae0c18f-50e2-4f18-8e68-7ce140434815',
       description: 'Intro to the basics of iot and digital transformation',
-      color: 'from-red-500 to-rose-500',
+      color: 'from-teal-500 to-cyan-500',
       logoUrl: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/cisco.svg'
     },
     {
@@ -66,7 +66,7 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/1EXD5D8_QWfk_2mElyqi4YC4V5BtMKgiS/view?usp=drive_link',
       verificationUrl: 'https://www.credly.com/badges/be5f310f-827c-45c6-9674-071c5fb66db3',
       description: 'Introduction to basics of cyber security',
-      color: 'from-rose-500 to-red-600',
+      color: 'from-cyan-500 to-teal-600',
       logoUrl: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/cisco.svg'
     },
     {
@@ -77,7 +77,7 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/1xdqE6ea7XfPpvZyP3T3TUDyN9Tx7hH2_/view?usp=sharing',
       verificationUrl: 'https://drive.google.com/file/d/1xdqE6ea7XfPpvZyP3T3TUDyN9Tx7hH2_/view?usp=sharing',
       description: 'Completed foundational AWS IoT skills, including hands-on experience with IoT SiteWise',
-      color: 'from-rose-500 to-red-600',
+      color: 'from-cyan-500 to-teal-600',
       logoUrl: 'https://logo.clearbit.com/amazon.com'
     },
     {
@@ -88,7 +88,7 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/1z5V5oAy-Y2fxDBOt0olCeEFrHYIcYCud/view?usp=sharing',
       verificationUrl: 'https://drive.google.com/file/d/1z5V5oAy-Y2fxDBOt0olCeEFrHYIcYCud/view?usp=sharing',
       description: 'Gained practical skills in securely connecting and managing AWS IoT devices in the cloud',
-      color: 'from-rose-500 to-red-600',
+      color: 'from-cyan-500 to-teal-600',
       logoUrl: 'https://logo.clearbit.com/amazon.com'
     },
     {
@@ -99,7 +99,7 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/1CkeInmHNCGwdgcstJxx3rlZHqbfepLHu/view?usp=sharing',
       verificationUrl: 'https://drive.google.com/file/d/1CkeInmHNCGwdgcstJxx3rlZHqbfepLHu/view?usp=sharing',
       description: 'Completed NPTEL\'s Introduction to Internet of Things, gaining foundational IoT knowledge and applications.',
-      color: 'from-rose-500 to-red-600',
+      color: 'from-cyan-500 to-teal-600',
       logoUrl: 'https://logo.clearbit.com/nptel.ac.in'
     },
     {
@@ -110,23 +110,23 @@ const Certifications: React.FC = () => {
       pdfUrl: 'https://drive.google.com/file/d/1Zhmu52MlbQaLRtld2_tC1RhNq_pX0Hnt/view?usp=sharing',
       verificationUrl: 'https://drive.google.com/file/d/1Zhmu52MlbQaLRtld2_tC1RhNq_pX0Hnt/view?usp=sharing',
       description: 'Introduction to basics of computer networks',
-      color: 'from-rose-500 to-red-600',
+      color: 'from-cyan-500 to-teal-600',
       logoUrl: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/cisco.svg'
     },
   ];
 
   return (
-    <section id="certifications" className="py-20 bg-gradient-to-b from-[#3B1E54] via-[#1F0A3A] to-[#3B1E54] relative border-t border-purple-500/20">
+    <section id="certifications" className="py-20 bg-gradient-to-b from-[#0d2137] via-[#0c1929] to-[#0d2137] relative border-t border-cyan-500/20">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-red-500/20 to-rose-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-rose-400/20 to-red-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-cyan-400/20 to-teal-500/20 rounded-full blur-3xl"></div>
       </div>
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="p-3 bg-gradient-to-r from-rose-500 to-red-500 rounded-xl shadow-lg">
+            <div className="p-3 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-xl shadow-lg">
               <Award size={32} className="text-white" />
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold text-white drop-shadow-lg">
@@ -143,7 +143,7 @@ const Certifications: React.FC = () => {
           {certifications.map((cert, index) => (
             <div
               key={index}
-              className="group bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 shadow-2xl hover:shadow-rose-500/20 transition-all duration-500 hover:transform hover:scale-105 hover:border-rose-500/50 relative"
+              className="group bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:transform hover:scale-105 hover:border-cyan-500/50 relative"
             >
               {/* Header */}
               <div className="flex items-start justify-between mb-4 relative">
@@ -159,33 +159,33 @@ const Certifications: React.FC = () => {
                     href={cert.pdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-2 py-1 bg-rose-500/20 border border-rose-500/30 rounded-md hover:bg-rose-500/30 transition-colors duration-200"
+                    className="flex items-center gap-1 px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-md hover:bg-cyan-500/30 transition-colors duration-200"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <span className="text-xs text-rose-400 font-medium">PDF</span>
-                    <ExternalLink size={12} className="text-rose-400" />
+                    <span className="text-xs text-cyan-400 font-medium">PDF</span>
+                    <ExternalLink size={12} className="text-cyan-400" />
                   </a>
                   <a
                     href={cert.verificationUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-2 py-1 bg-rose-500/20 border border-rose-500/30 rounded-md hover:bg-rose-500/30 transition-colors duration-200"
+                    className="flex items-center gap-1 px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-md hover:bg-cyan-500/30 transition-colors duration-200"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <span className="text-xs text-rose-400 font-medium">Verify</span>
-                    <ExternalLink size={12} className="text-rose-400" />
+                    <span className="text-xs text-cyan-400 font-medium">Verify</span>
+                    <ExternalLink size={12} className="text-cyan-400" />
                   </a>
                 </div>
               </div>
 
               {/* Content */}
               <div className="space-y-3">
-                <h3 className="text-lg font-bold text-white group-hover:text-rose-400 transition-colors duration-300 line-clamp-2">
+                <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors duration-300 line-clamp-2">
                   {cert.title}
                 </h3>
                 
                 <div className="flex items-center gap-2 text-gray-400">
-                  <CheckCircle size={16} className="text-rose-400" />
+                  <CheckCircle size={16} className="text-cyan-400" />
                   <span className="text-sm font-medium">{cert.issuer}</span>
                 </div>
 
@@ -203,15 +203,15 @@ const Certifications: React.FC = () => {
                 {/* Verification Badge */}
                 <div className="flex items-center justify-between pt-3 border-t border-slate-700/50">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-rose-400 rounded-full animate-pulse"></div>
-                    <span className="text-xs text-rose-400 font-medium">Verified</span>
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                    <span className="text-xs text-cyan-400 font-medium">Verified</span>
                   </div>
                   <div className="flex gap-2">
                     <a
                       href={cert.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3 py-1 bg-rose-500/20 border border-rose-500/30 rounded-full hover:bg-rose-500/30 transition-colors duration-200 text-xs text-rose-300 font-medium"
+                      className="px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full hover:bg-cyan-500/30 transition-colors duration-200 text-xs text-cyan-300 font-medium"
                     >
                       Download PDF
                     </a>
@@ -219,7 +219,7 @@ const Certifications: React.FC = () => {
                       href={cert.verificationUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3 py-1 bg-rose-500/20 border border-rose-500/30 rounded-full hover:bg-rose-500/30 transition-colors duration-200 text-xs text-rose-300 font-medium"
+                      className="px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-full hover:bg-cyan-500/30 transition-colors duration-200 text-xs text-cyan-300 font-medium"
                     >
                       Verify Online
                     </a>
