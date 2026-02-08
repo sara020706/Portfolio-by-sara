@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react';\r\nimport { useLocalStorage } from '../hooks/useLocalStorage';\r\nimport { defaultBadges } from '../data/badges';\r\nimport { Badge as BadgeType } from '../data/types';
 import { Shield, ExternalLink, Star, CheckCircle, ChevronDown, ChevronUp } from 'lucide-react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { defaultBadges } from '../data/badges';

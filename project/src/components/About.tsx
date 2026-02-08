@@ -4,10 +4,10 @@ import Img1 from './assets/img1.jpg';
 
 const About: React.FC = () => {
   const skills = [
-    { name: 'Frontend Development', icon: Code, color: 'from-cyan-500 to-teal-500' },
-    { name: 'UI/UX Design', icon: Palette, color: 'from-cyan-400 to-cyan-600' },
+    { name: 'Frontend Development', icon: Code, color: 'from-orange-600 to-orange-500' },
+    { name: 'UI/UX Design', icon: Palette, color: 'from-orange-500 to-orange-700' },
     { name: 'Performance Optimization', icon: Zap, color: 'from-yellow-500 to-orange-500' },
-    { name: 'User Experience', icon: Heart, color: 'from-teal-500 to-cyan-500' },
+    { name: 'User Experience', icon: Heart, color: 'from-orange-500 to-orange-600' },
   ];
 
   const technologies = [
@@ -24,42 +24,42 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 relative bg-gradient-to-b from-[#0d2137] via-[#0c1929] to-[#0d2137] border-t border-cyan-500/20">
+    <section id="about" className="py-20 relative bg-gradient-to-b from-[#0d2137] via-[#0c1929] to-[#0d2137] border-t border-orange-600/20">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-cyan-400/20 to-teal-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-orange-500/20 to-orange-500/20 rounded-full blur-3xl"></div>
       </div>
-      
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 drop-shadow-lg">
             About Me
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-Beyond development, I’m someone who thrives on learning and exploring new technologies. I’m currently diving into AI, cloud computing, and problem-solving through projects that push me to think differently. My goal is to blend creativity with technical depth to build solutions that truly make an impact.          </p>
+            Beyond development, I’m someone who thrives on learning and exploring new technologies. I’m currently diving into AI, cloud computing, and problem-solving through projects that push me to think differently. My goal is to blend creativity with technical depth to build solutions that truly make an impact.          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Profile Image */}
           <div className="relative">
             <div className="relative z-10">
-              <img 
+              <img
                 src="/img1.jpg"
                 alt="Parthasarathy"
-                className="w-full max-w-md mx-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500 border-2 border-cyan-500/30"
+                className="w-full max-w-md mx-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500 border-2 border-orange-600/30"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-2xl blur-3xl opacity-50 -z-10 transform scale-110"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-700 rounded-2xl blur-3xl opacity-50 -z-10 transform scale-110"></div>
           </div>
 
           {/* Content */}
           <div className="space-y-8">
             <div className="prose pcyan-lg dark:pcyan-invert">
               <p className="text-gray-300 leading-relaxed text-lg">
-With a foundation in Artificial Intelligence and Data Science and a deep passion for emerging technologies, I blend analytical thinking with creative problem-solving. I believe technology should do more than solve challenges at scale — it should spark innovation, curiosity, and meaningful change              </p>
+                With a foundation in Artificial Intelligence and Data Science and a deep passion for emerging technologies, I blend analytical thinking with creative problem-solving. I believe technology should do more than solve challenges at scale — it should spark innovation, curiosity, and meaningful change              </p>
               <p className="text-gray-300 leading-relaxed text-lg">
-                When I'm not coding, you'll find me exploring new technologies, contributing to 
+                When I'm not coding, you'll find me exploring new technologies, contributing to
                 open-source projects, or sharing knowledge with the developer community.
               </p>
             </div>
@@ -69,9 +69,9 @@ With a foundation in Artificial Intelligence and Data Science and a deep passion
               {skills.map((skill, index) => {
                 const IconComponent = skill.icon;
                 return (
-                  <div 
+                  <div
                     key={skill.name}
-                    className="group p-6 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 hover:transform hover:scale-105 hover:border-cyan-500/30"
+                    className="group p-6 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl shadow-lg hover:shadow-2xl hover:shadow-orange-600/10 transition-all duration-300 hover:transform hover:scale-105 hover:border-orange-600/30"
                   >
                     <div className={`w-12 h-12 bg-gradient-to-r ${skill.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                       <IconComponent size={24} className="text-white" />
@@ -91,9 +91,9 @@ With a foundation in Artificial Intelligence and Data Science and a deep passion
               </h3>
               <div className="flex flex-wrap gap-2">
                 {technologies.map((tech) => (
-                  <span 
+                  <span
                     key={tech}
-                    className="px-4 py-2 bg-slate-700/50 backdrop-blur-sm border border-slate-600/50 text-gray-300 rounded-full text-sm font-medium hover:bg-cyan-500/10 hover:border-cyan-400/50 hover:text-cyan-300 transition-all duration-200 hover:shadow-lg hover:shadow-cyan-500/10"
+                    className="px-4 py-2 bg-slate-700/50 backdrop-blur-sm border border-slate-600/50 text-gray-300 rounded-full text-sm font-medium hover:bg-orange-600/10 hover:border-orange-500/50 hover:text-cyan-300 transition-all duration-200 hover:shadow-lg hover:shadow-orange-600/10"
                   >
                     {tech}
                   </span>
