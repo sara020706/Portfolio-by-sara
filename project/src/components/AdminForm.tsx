@@ -142,9 +142,9 @@ export const AdminForm: React.FC<AdminFormProps> = ({ onClose }) => {
             tags: projectForm.tags || [],
             github: projectForm.github || '',
             live: projectForm.live || '',
-            gradient: projectForm.gradient || 'from-orange-600 to-orange-500',
+            gradient: projectForm.gradient || '',
             icon: projectForm.icon || 'Folder',
-            iconColor: projectForm.iconColor || 'text-orange-100',
+            iconColor: projectForm.iconColor || 'text-light',
         };
 
         if (editIndex !== null) {
@@ -204,7 +204,7 @@ export const AdminForm: React.FC<AdminFormProps> = ({ onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-slate-900 border border-pumpkin/30 rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="bg-slate-900 border border-accent/50 rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-slate-700">
                     <h2 className="text-2xl font-bold text-white">Admin Panel - Content Management</h2>
@@ -235,7 +235,7 @@ export const AdminForm: React.FC<AdminFormProps> = ({ onClose }) => {
                     <button
                         onClick={() => setActiveTab('certifications')}
                         className={`px-6 py-3 font-medium transition-colors ${activeTab === 'certifications'
-                            ? 'text-pumpkin border-b-2 border-pumpkin'
+                            ? 'text-light border-b-2 border-accent'
                             : 'text-gray-400 hover:text-white'
                             }`}
                     >
@@ -244,7 +244,7 @@ export const AdminForm: React.FC<AdminFormProps> = ({ onClose }) => {
                     <button
                         onClick={() => setActiveTab('badges')}
                         className={`px-6 py-3 font-medium transition-colors ${activeTab === 'badges'
-                            ? 'text-pumpkin border-b-2 border-pumpkin'
+                            ? 'text-light border-b-2 border-accent'
                             : 'text-gray-400 hover:text-white'
                             }`}
                     >
@@ -253,7 +253,7 @@ export const AdminForm: React.FC<AdminFormProps> = ({ onClose }) => {
                     <button
                         onClick={() => setActiveTab('internships')}
                         className={`px-6 py-3 font-medium transition-colors ${activeTab === 'internships'
-                            ? 'text-pumpkin border-b-2 border-pumpkin'
+                            ? 'text-light border-b-2 border-accent'
                             : 'text-gray-400 hover:text-white'
                             }`}
                     >
@@ -262,7 +262,7 @@ export const AdminForm: React.FC<AdminFormProps> = ({ onClose }) => {
                     <button
                         onClick={() => setActiveTab('projects')}
                         className={`px-6 py-3 font-medium transition-colors ${activeTab === 'projects'
-                            ? 'text-pumpkin border-b-2 border-pumpkin'
+                            ? 'text-light border-b-2 border-accent'
                             : 'text-gray-400 hover:text-white'
                             }`}
                     >
@@ -344,40 +344,40 @@ const CertificationTab: React.FC<{
                     placeholder="Title *"
                     value={certForm.title || ''}
                     onChange={(e) => setCertForm({ ...certForm, title: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-light focus:ring-2 focus:outline-none"
                 />
                 <input
                     type="text"
                     placeholder="Issuer *"
                     value={certForm.issuer || ''}
                     onChange={(e) => setCertForm({ ...certForm, issuer: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-light focus:ring-2 focus:outline-none"
                 />
                 <input
                     type="text"
                     placeholder="Date"
                     value={certForm.date || ''}
                     onChange={(e) => setCertForm({ ...certForm, date: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <input
                     type="url"
                     placeholder="Verification URL"
                     value={certForm.verificationUrl || ''}
                     onChange={(e) => setCertForm({ ...certForm, verificationUrl: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <input
                     type="url"
                     placeholder="PDF URL"
                     value={certForm.pdfUrl || ''}
                     onChange={(e) => setCertForm({ ...certForm, pdfUrl: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <div className="flex gap-2">
                     <button
                         onClick={onSave}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-pumpkin hover:bg-pumpkin-dark text-white rounded-lg transition-colors"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 btn-primary text-white rounded-lg transition-colors"
                     >
                         <Save size={16} />
                         {editIndex !== null ? 'Update' : 'Add'}
@@ -412,14 +412,11 @@ const CertificationTab: React.FC<{
                                         setCertForm(cert);
                                         setEditIndex(index);
                                     }}
-                                    className="p-2 hover:bg-slate-700 rounded text-pumpkin transition-colors"
+                                    className="p-2 hover:bg-slate-700 rounded text-light transition-colors"
                                 >
                                     Edit
                                 </button>
-                                <button
-                                    onClick={() => onDelete(index)}
-                                    className="p-2 hover:bg-slate-700 rounded text-red-400 transition-colors"
-                                >
+                                <button onClick={() => onDelete(index)} className="p-2 hover:bg-slate-700 rounded text-light transition-colors">
                                     <Trash2 size={16} />
                                 </button>
                             </div>
@@ -453,39 +450,39 @@ const BadgeTab: React.FC<{
                     placeholder="Title *"
                     value={badgeForm.title || ''}
                     onChange={(e) => setBadgeForm({ ...badgeForm, title: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <input
                     type="text"
                     placeholder="Issuer *"
                     value={badgeForm.issuer || ''}
                     onChange={(e) => setBadgeForm({ ...badgeForm, issuer: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <input
                     type="text"
                     placeholder="Date"
                     value={badgeForm.date || ''}
                     onChange={(e) => setBadgeForm({ ...badgeForm, date: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <textarea
                     placeholder="Description"
                     value={badgeForm.description || ''}
                     onChange={(e) => setBadgeForm({ ...badgeForm, description: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none h-24"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-light focus:ring-2 focus:outline-none h-24"
                 />
                 <input
                     type="url"
                     placeholder="Verification URL"
                     value={badgeForm.verificationUrl || ''}
                     onChange={(e) => setBadgeForm({ ...badgeForm, verificationUrl: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-light focus:ring-2 focus:outline-none"
                 />
                 <div className="flex gap-2">
                     <button
                         onClick={onSave}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-pumpkin hover:bg-pumpkin-dark text-white rounded-lg transition-colors"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 btn-primary text-white rounded-lg transition-colors"
                     >
                         <Save size={16} />
                         {editIndex !== null ? 'Update' : 'Add'}
@@ -521,14 +518,11 @@ const BadgeTab: React.FC<{
                                         setBadgeForm(badge);
                                         setEditIndex(index);
                                     }}
-                                    className="p-2 hover:bg-slate-700 rounded text-pumpkin transition-colors"
+                                    className="p-2 hover:bg-slate-700 rounded muted transition-colors"
                                 >
                                     Edit
                                 </button>
-                                <button
-                                    onClick={() => onDelete(index)}
-                                    className="p-2 hover:bg-slate-700 rounded text-red-400 transition-colors"
-                                >
+                                <button onClick={() => onDelete(index)} className="p-2 hover:bg-slate-700 rounded text-light transition-colors">
                                     <Trash2 size={16} />
                                 </button>
                             </div>
@@ -572,14 +566,14 @@ const InternshipTab: React.FC<{
                     placeholder="Title *"
                     value={internshipForm.title || ''}
                     onChange={(e) => setInternshipForm({ ...internshipForm, title: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <input
                     type="text"
                     placeholder="Company *"
                     value={internshipForm.company || ''}
                     onChange={(e) => setInternshipForm({ ...internshipForm, company: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
 
                 {/* Type Selector - More Prominent */}
@@ -590,7 +584,7 @@ const InternshipTab: React.FC<{
                             type="button"
                             onClick={() => setInternshipForm({ ...internshipForm, type: 'virtual' })}
                             className={`px-4 py-3 rounded-lg font-medium transition-all ${(internshipForm.type || 'virtual') === 'virtual'
-                                ? 'bg-pumpkin text-white shadow-lg'
+                                ? 'btn-primary text-white shadow-lg'
                                 : 'bg-slate-900 text-gray-400 hover:bg-slate-800'
                                 }`}
                         >
@@ -600,7 +594,7 @@ const InternshipTab: React.FC<{
                             type="button"
                             onClick={() => setInternshipForm({ ...internshipForm, type: 'offline' })}
                             className={`px-4 py-3 rounded-lg font-medium transition-all ${internshipForm.type === 'offline'
-                                ? 'bg-pumpkin text-white shadow-lg'
+                                ? 'btn-primary text-white shadow-lg'
                                 : 'bg-slate-900 text-gray-400 hover:bg-slate-800'
                                 }`}
                         >
@@ -614,32 +608,32 @@ const InternshipTab: React.FC<{
                     placeholder="Duration (e.g., Jun 2024 - Aug 2024)"
                     value={internshipForm.duration || ''}
                     onChange={(e) => setInternshipForm({ ...internshipForm, duration: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <textarea
                     placeholder="Description"
                     value={internshipForm.description || ''}
                     onChange={(e) => setInternshipForm({ ...internshipForm, description: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none h-24"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none h-24"
                 />
                 <input
                     type="text"
                     placeholder="Skills (comma-separated)"
                     value={internshipForm.skills?.join(', ') || ''}
                     onChange={(e) => setInternshipForm({ ...internshipForm, skills: e.target.value.split(',').map(s => s.trim()) })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <input
                     type="url"
                     placeholder="Certificate URL"
                     value={internshipForm.certificate || ''}
                     onChange={(e) => setInternshipForm({ ...internshipForm, certificate: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <div className="flex gap-2">
                     <button
                         onClick={onSave}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-pumpkin hover:bg-pumpkin-dark text-white rounded-lg transition-colors"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 btn-primary text-white rounded-lg transition-colors"
                     >
                         <Save size={16} />
                         {editIndex !== null ? 'Update' : 'Add'}
@@ -669,7 +663,7 @@ const InternshipTab: React.FC<{
                     <button
                         onClick={() => setFilter('all')}
                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'all'
-                            ? 'bg-pumpkin text-white'
+                            ? 'btn-primary text-white'
                             : 'bg-slate-800 text-gray-400 hover:bg-slate-700'
                             }`}
                     >
@@ -678,7 +672,7 @@ const InternshipTab: React.FC<{
                     <button
                         onClick={() => setFilter('virtual')}
                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'virtual'
-                            ? 'bg-pumpkin text-white'
+                            ? 'btn-primary text-white'
                             : 'bg-slate-800 text-gray-400 hover:bg-slate-700'
                             }`}
                     >
@@ -687,7 +681,7 @@ const InternshipTab: React.FC<{
                     <button
                         onClick={() => setFilter('offline')}
                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'offline'
-                            ? 'bg-pumpkin text-white'
+                            ? 'btn-primary text-white'
                             : 'bg-slate-800 text-gray-400 hover:bg-slate-700'
                             }`}
                     >
@@ -721,7 +715,7 @@ const InternshipTab: React.FC<{
                                             <p className="text-sm text-gray-500 line-clamp-2 mt-1">{internship.description}</p>
                                             <div className="flex flex-wrap gap-1 mt-2">
                                                 {internship.skills.map((skill, i) => (
-                                                    <span key={i} className="text-xs px-2 py-1 bg-pumpkin/20 text-pumpkin rounded">
+                                                    <span key={i} className="text-xs px-2 py-1 rounded" style={{ background: 'var(--accent-10)', color: 'var(--color-accent)' }}>
                                                         {skill}
                                                     </span>
                                                 ))}
@@ -733,14 +727,11 @@ const InternshipTab: React.FC<{
                                                     setInternshipForm(internship);
                                                     setEditIndex(actualIndex);
                                                 }}
-                                                className="p-2 hover:bg-slate-700 rounded text-pumpkin transition-colors"
+                                                className="p-2 hover:bg-slate-700 rounded muted transition-colors"
                                             >
                                                 Edit
                                             </button>
-                                            <button
-                                                onClick={() => onDelete(actualIndex)}
-                                                className="p-2 hover:bg-slate-700 rounded text-red-400 transition-colors"
-                                            >
+                                            <button onClick={() => onDelete(actualIndex)} className="p-2 hover:bg-slate-700 rounded text-light transition-colors">
                                                 <Trash2 size={16} />
                                             </button>
                                         </div>
@@ -766,14 +757,7 @@ const ProjectTab: React.FC<{
     onDelete: (index: number) => void;
 }> = ({ projects, projectForm, setProjectForm, editIndex, setEditIndex, onSave, onDelete }) => {
     const iconOptions = ['Code2', 'Smartphone', 'Timer', 'Heart', 'Folder', 'Zap', 'Palette'];
-    const gradientOptions = [
-        'from-orange-600 via-orange-500 to-amber-500',
-        'from-orange-500 via-orange-600 to-orange-700',
-        'from-orange-500 via-orange-600 to-red-600',
-        'from-pink-500 via-orange-500 to-orange-600',
-        'from-purple-500 via-orange-500 to-orange-600',
-        'from-blue-500 via-orange-500 to-orange-600',
-    ];
+    const gradientOptions = ['palette'];
 
     return (
         <div className="grid md:grid-cols-2 gap-6">
@@ -787,34 +771,34 @@ const ProjectTab: React.FC<{
                     placeholder="Title *"
                     value={projectForm.title || ''}
                     onChange={(e) => setProjectForm({ ...projectForm, title: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <textarea
                     placeholder="Description *"
                     value={projectForm.description || ''}
                     onChange={(e) => setProjectForm({ ...projectForm, description: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none h-24"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none h-24"
                 />
                 <input
                     type="text"
                     placeholder="Tags (comma-separated)"
                     value={projectForm.tags?.join(', ') || ''}
                     onChange={(e) => setProjectForm({ ...projectForm, tags: e.target.value.split(',').map(s => s.trim()) })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <input
                     type="url"
                     placeholder="GitHub URL"
                     value={projectForm.github || ''}
                     onChange={(e) => setProjectForm({ ...projectForm, github: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
                 <input
                     type="url"
                     placeholder="Live URL"
                     value={projectForm.live || ''}
                     onChange={(e) => setProjectForm({ ...projectForm, live: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
 
                 {/* Icon Selector */}
@@ -823,7 +807,7 @@ const ProjectTab: React.FC<{
                     <select
                         value={projectForm.icon || 'Folder'}
                         onChange={(e) => setProjectForm({ ...projectForm, icon: e.target.value })}
-                        className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                        className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                     >
                         {iconOptions.map(icon => (
                             <option key={icon} value={icon}>{icon}</option>
@@ -837,7 +821,7 @@ const ProjectTab: React.FC<{
                     <select
                         value={projectForm.gradient || gradientOptions[0]}
                         onChange={(e) => setProjectForm({ ...projectForm, gradient: e.target.value })}
-                        className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                        className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                     >
                         {gradientOptions.map((grad, i) => (
                             <option key={i} value={grad}>{grad}</option>
@@ -847,16 +831,16 @@ const ProjectTab: React.FC<{
 
                 <input
                     type="text"
-                    placeholder="Icon Color (e.g., text-orange-100)"
+                    placeholder="Icon Color (e.g., text-light)"
                     value={projectForm.iconColor || ''}
                     onChange={(e) => setProjectForm({ ...projectForm, iconColor: e.target.value })}
-                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-pumpkin focus:outline-none"
+                    className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none"
                 />
 
                 <div className="flex gap-2">
                     <button
                         onClick={onSave}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-pumpkin hover:bg-pumpkin-dark text-white rounded-lg transition-colors"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2 btn-primary text-white rounded-lg transition-colors"
                     >
                         <Save size={16} />
                         {editIndex !== null ? 'Update' : 'Add'}
@@ -886,7 +870,7 @@ const ProjectTab: React.FC<{
                                 <p className="text-sm text-gray-500 line-clamp-2 mt-1">{project.description}</p>
                                 <div className="flex flex-wrap gap-1 mt-2">
                                     {project.tags.map((tag, i) => (
-                                        <span key={i} className="text-xs px-2 py-1 bg-pumpkin/20 text-pumpkin rounded">
+                                        <span key={i} className="text-xs px-2 py-1 rounded" style={{ background: 'var(--accent-10)', color: 'var(--color-accent)' }}>
                                             {tag}
                                         </span>
                                     ))}
@@ -899,13 +883,13 @@ const ProjectTab: React.FC<{
                                         setProjectForm(project);
                                         setEditIndex(index);
                                     }}
-                                    className="p-2 hover:bg-slate-700 rounded text-pumpkin transition-colors"
+                                    className="p-2 hover:bg-slate-700 rounded muted transition-colors"
                                 >
                                     Edit
                                 </button>
                                 <button
                                     onClick={() => onDelete(index)}
-                                    className="p-2 hover:bg-slate-700 rounded text-red-400 transition-colors"
+                                    className="p-2 hover:bg-slate-700 rounded muted transition-colors"
                                 >
                                     <Trash2 size={16} />
                                 </button>

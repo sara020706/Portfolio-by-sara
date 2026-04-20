@@ -1,5 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
-import { Settings } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -12,15 +11,12 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Corner3D from './components/Corner3D';
 
-// Lazy load AdminForm only in development - completely excluded from production builds
-const AdminForm = import.meta.env.DEV
-  ? lazy(() => import('./components/AdminForm').then(module => ({ default: module.AdminForm })))
-  : null;
+// Admin panel removed — development-only panel was deleted per request
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
-  const [showAdminForm, setShowAdminForm] = useState(false);
-  const isDev = import.meta.env.DEV;
+  // no dev-only UI shown; leave import.meta.env.DEV available if needed in future
+  void import.meta.env.DEV;
 
   useEffect(() => {
     // Initialize dark mode
@@ -47,27 +43,39 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Simple scroll progress indicator (updates height of .scroll-progress > i)
+    const prog = document.querySelector('.scroll-progress > i') as HTMLElement | null;
+    const onScroll = () => {
+      if (!prog) return;
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      prog.style.height = `${pct}%`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    // Custom cursor: small circular cursor that follows mouse
+    const cursor = document.getElementById('custom-cursor');
+    if (!cursor) return;
+    const move = (e: MouseEvent) => {
+      cursor.style.transform = `translate3d(${e.clientX - 8}px, ${e.clientY - 8}px, 0)`;
+    };
+    window.addEventListener('mousemove', move);
+    return () => window.removeEventListener('mousemove', move);
+  }, []);
+
   return (
     <div className="dark transition-colors duration-300">
-      {/* Scrollbar styles matching pumpkin theme */}
-      <style>{`
-        /* WebKit browsers */
-        .dark ::-webkit-scrollbar-track { background: rgba(10,15,26,0.6); }
-        .dark ::-webkit-scrollbar-thumb {
-          background: linear-gradient(180deg, #FD802E 0%, #E66A1A 100%);
-          border-radius: 9999px;
-          border: 3px solid rgba(0,0,0,0);
-          background-clip: padding-box;
-        }
-        .dark ::-webkit-scrollbar-thumb:hover { 
-          background: linear-gradient(180deg, #FE9A56 0%, #FD802E 100%);
-        }
+      {/* Scroll progress + custom cursor */}
+      <div className="scroll-progress"><i style={{ height: '0%' }} /></div>
+      <div id="custom-cursor" style={{ position: 'fixed', pointerEvents: 'none', width: 16, height: 16, borderRadius: 9999, background: 'var(--color-accent)', transform: 'translate3d(-9999px,-9999px,0)', boxShadow: '0 0 12px rgba(74,127,167,0.6)', zIndex: 9999 }} />
 
-        /* Firefox */
-        .dark { scrollbar-color: #FD802E rgba(10,15,26,0.6); }
-      `}</style>
-
-      <div className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-[#0a0f1a] via-[#0c1929] to-[#0a0f1a]">
+      <div className="min-h-screen transition-colors duration-300 surface-bg">
         <Navigation activeSection={activeSection} />
         <Hero />
         <About />
@@ -80,27 +88,7 @@ function App() {
         <Footer />
         <Corner3D />
 
-        {/* Development-only Admin Button */}
-        {isDev && (
-          <button
-            onClick={() => setShowAdminForm(true)}
-            className="fixed bottom-6 left-6 p-4 bg-pumpkin hover:bg-pumpkin-dark text-white rounded-full shadow-2xl hover:shadow-pumpkin/50 transition-all duration-300 hover:scale-110 z-50 group"
-            title="Admin Panel (Dev Only)"
-          >
-            <Settings size={24} className="group-hover:rotate-90 transition-transform duration-300" />
-          </button>
-        )}
-
-        {/* Admin Form Modal - Lazy loaded, excluded from production */}
-        {isDev && showAdminForm && AdminForm && (
-          <Suspense fallback={
-            <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center">
-              <div className="text-white text-lg">Loading Admin Panel...</div>
-            </div>
-          }>
-            <AdminForm onClose={() => setShowAdminForm(false)} />
-          </Suspense>
-        )}
+        {/* admin panel removed */}
       </div>
     </div>
   );

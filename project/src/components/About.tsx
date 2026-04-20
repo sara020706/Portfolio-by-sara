@@ -1,13 +1,13 @@
 import React from 'react';
 import { Code, Palette, Zap, Heart } from 'lucide-react';
-import Img1 from './assets/img1.jpg';
+// image imported via static path in markup
 
 const About: React.FC = () => {
   const skills = [
-    { name: 'Frontend Development', icon: Code, color: 'from-orange-600 to-orange-500' },
-    { name: 'UI/UX Design', icon: Palette, color: 'from-orange-500 to-orange-700' },
-    { name: 'Performance Optimization', icon: Zap, color: 'from-yellow-500 to-orange-500' },
-    { name: 'User Experience', icon: Heart, color: 'from-orange-500 to-orange-600' },
+    { name: 'Frontend Development', icon: Code, color: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' },
+    { name: 'UI/UX Design', icon: Palette, color: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' },
+    { name: 'Performance Optimization', icon: Zap, color: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' },
+    { name: 'User Experience', icon: Heart, color: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' },
   ];
 
   const technologies = [
@@ -24,11 +24,17 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 relative bg-gradient-to-b from-[#0d2137] via-[#0c1929] to-[#0d2137] border-t border-orange-600/20">
+    <section id="about" className="py-20 relative surface-bg border-t border-accent">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-orange-500/20 to-orange-500/20 rounded-full blur-3xl"></div>
+        <div
+          className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, var(--accent-15) 0%, transparent 60%)' }}
+        />
+        <div
+          className="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, var(--accent-10) 0%, transparent 60%)' }}
+        />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,10 +53,11 @@ const About: React.FC = () => {
               <img
                 src="/img1.jpg"
                 alt="Parthasarathy"
-                className="w-full max-w-md mx-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500 border-2 border-orange-600/30"
+                className="w-full max-w-md mx-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                style={{ border: '2px solid rgba(179,207,229,0.12)' }}
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-700 rounded-2xl blur-3xl opacity-50 -z-10 transform scale-110"></div>
+            <div className="absolute inset-0 rounded-2xl blur-3xl opacity-50 -z-10 transform scale-110" style={{ background: 'linear-gradient(90deg, rgba(74,127,167,0.08), rgba(179,207,229,0.04))' }}></div>
           </div>
 
           {/* Content */}
@@ -66,14 +73,14 @@ const About: React.FC = () => {
 
             {/* Skills Grid */}
             <div className="grid grid-cols-2 gap-4">
-              {skills.map((skill, index) => {
+              {skills.map((skill) => {
                 const IconComponent = skill.icon;
                 return (
                   <div
                     key={skill.name}
-                    className="group p-6 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl shadow-lg hover:shadow-2xl hover:shadow-orange-600/10 transition-all duration-300 hover:transform hover:scale-105 hover:border-orange-600/30"
+                    className="group p-6 glass-effect rounded-xl shadow-lg hover:shadow-lg transition-all duration-300 hover:transform hover:scale-105"
                   >
-                    <div className={`w-12 h-12 bg-gradient-to-r ${skill.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300" style={{ background: skill.color }}>
                       <IconComponent size={24} className="text-white" />
                     </div>
                     <h3 className="font-semibold text-white text-sm">
@@ -93,7 +100,7 @@ const About: React.FC = () => {
                 {technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-4 py-2 bg-slate-700/50 backdrop-blur-sm border border-slate-600/50 text-gray-300 rounded-full text-sm font-medium hover:bg-orange-600/10 hover:border-orange-500/50 hover:text-cyan-300 transition-all duration-200 hover:shadow-lg hover:shadow-orange-600/10"
+                    className="px-4 py-2 glass-effect text-gray-300 rounded-full text-sm font-medium transition-all duration-200"
                   >
                     {tech}
                   </span>

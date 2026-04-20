@@ -9,20 +9,25 @@ const Internships: React.FC = () => {
 
   // Filter by type
   const virtualInternships = allInternships.filter(i => i.type === 'virtual');
-  const offlineInternships = allInternships.filter(i => i.type === 'offline');
 
   return (
-    <section id="internships" className="py-20 bg-gradient-to-b from-[#0d2137] via-[#0c1929] to-[#0d2137] relative border-t border-orange-600/20">
+  <section id="internships" className="py-20 surface-bg relative border-t border-accent">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-orange-500/20 to-orange-500/20 rounded-full blur-3xl"></div>
+        <div
+          className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, var(--accent-15) 0%, transparent 60%)' }}
+        />
+        <div
+          className="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, var(--accent-10) 0%, transparent 60%)' }}
+        />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="p-3 bg-gradient-to-r from-orange-600 to-orange-500 rounded-xl shadow-lg">
+            <div className="p-3 rounded-xl shadow-lg" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
               <Briefcase size={32} className="text-white" />
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold text-white drop-shadow-lg">
@@ -38,7 +43,7 @@ const Internships: React.FC = () => {
           {/* Virtual Internships Section */}
           <div className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-gradient-to-r from-orange-600 to-orange-500 rounded-lg">
+              <div className="p-2 rounded-lg" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
                 <Award size={24} className="text-white" />
               </div>
               <h3 className="text-2xl font-bold text-white">Virtual Internships</h3>
@@ -47,11 +52,11 @@ const Internships: React.FC = () => {
             {virtualInternships.map((internship, index) => (
               <div
                 key={index}
-                className="group bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 shadow-2xl hover:shadow-orange-600/20 transition-all duration-500 hover:transform hover:scale-[1.02] hover:border-orange-600/50 relative"
+                className="group glass-effect rounded-2xl p-6 shadow-2xl hover:shadow-lg transition-all duration-500 hover:transform hover:scale-[1.02] relative"
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="px-2 py-1 bg-pumpkin rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+                  <div className="px-2 py-1 rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300 flex items-center justify-center" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
                     <span className="text-white font-semibold text-[10px] text-center uppercase tracking-wider leading-tight whitespace-nowrap">
                       {internship.company.length > 15 ? internship.company.substring(0, 15) + '...' : internship.company}
                     </span>
@@ -62,21 +67,21 @@ const Internships: React.FC = () => {
                     rel="noopener noreferrer"
                     className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
-                    <div className="flex items-center gap-1 px-2 py-1 bg-orange-600/20 border border-orange-600/30 rounded-md hover:bg-orange-600/30 transition-colors duration-200">
-                      <span className="text-xs text-orange-500 font-medium">View</span>
-                      <ExternalLink size={12} className="text-orange-500" />
+                    <div className="flex items-center gap-1 px-2 py-1 rounded-md" style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)' }}>
+                      <span className="text-xs muted font-medium">View</span>
+                      <ExternalLink size={12} style={{ color: 'var(--color-accent)' }} />
                     </div>
                   </a>
                 </div>
 
                 {/* Content */}
                 <div className="space-y-3">
-                  <h4 className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors duration-300">
+                  <h4 className="text-xl font-bold text-white transition-colors duration-300">
                     {internship.title}
                   </h4>
 
                   <div className="flex items-center gap-2 text-gray-400">
-                    <Building size={16} className="text-orange-500" />
+                    <Building size={16} style={{ color: 'var(--color-accent)' }} />
                     <span className="text-sm font-medium">{internship.company}</span>
                   </div>
 
@@ -96,17 +101,18 @@ const Internships: React.FC = () => {
                   <div className="flex flex-wrap gap-2 pt-2">
                     {internship.skills.map((skill: string) => (
                       <span
-                        key={skill}
-                        className="px-3 py-1 bg-orange-600/10 border border-orange-600/30 text-pumpkin rounded-full text-xs font-medium"
-                      >
-                        {skill}
-                      </span>
+                          key={skill}
+                          className="px-3 py-1 rounded-full text-xs font-medium"
+                          style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)', color: 'var(--color-accent)' }}
+                        >
+                          {skill}
+                        </span>
                     ))}
                   </div>
                 </div>
 
                 {/* Hover Effect Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-r ${internship.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl pointer-events-none`}></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl pointer-events-none" style={{ background: 'linear-gradient(90deg, rgba(74,127,167,0.06), rgba(179,207,229,0.03))' }}></div>
               </div>
             ))}
           </div>
@@ -114,7 +120,7 @@ const Internships: React.FC = () => {
           {/* Offline Internships Section */}
           <div className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-gradient-to-r from-orange-600 to-orange-500 rounded-lg">
+              <div className="p-2 rounded-lg" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
                 <Building size={24} className="text-white" />
               </div>
               <h3 className="text-2xl font-bold text-white">Offline Internships</h3>
@@ -132,7 +138,7 @@ const Internships: React.FC = () => {
                 I haven't cracked any formal offline internships yet, but I'm actively seeking opportunities to gain hands-on industry experience and contribute to innovative projects.
               </p>
               <div className="pt-4">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-600/10 border border-orange-600/30 rounded-full text-pumpkin text-sm">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm" style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)', color: 'var(--color-accent)' }}>
                   <span>🎯</span>
                   <span className="font-medium">Open to Opportunities</span>
                 </div>

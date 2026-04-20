@@ -113,24 +113,18 @@ const Corner3D: React.FC = () => {
     >
       {/* Click count badge */}
       {clickCount > 0 && (
-        <div className="absolute -top-1 -right-1 w-6 h-6 bg-pumpkin text-white text-xs font-bold rounded-full flex items-center justify-center shadow-lg animate-pulse z-10">
+        <div className="absolute -top-1 -right-1 w-6 h-6 btn-primary text-white text-xs font-bold rounded-full flex items-center justify-center shadow-lg animate-pulse z-10">
           {clickCount}
         </div>
       )}
 
       {/* Fun message - appears on click */}
-      <div
-        className={`absolute -top-12 left-1/2 -translate-x-1/2 px-4 py-2 bg-gradient-to-r from-pumpkin to-pumpkin-dark text-white text-sm font-bold rounded-full shadow-2xl whitespace-nowrap transition-all duration-300 ${showMessage ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-75'
-          }`}
-      >
+      <div className={`absolute -top-12 left-1/2 -translate-x-1/2 px-4 py-2 text-sm font-bold rounded-full shadow-2xl whitespace-nowrap transition-all duration-300 ${showMessage ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-75'}`} style={{ background: 'linear-gradient(90deg,var(--color-primary),var(--color-accent))', color: 'var(--color-light)' }}>
         {messages[clickCount % messages.length]}
       </div>
 
       {/* Thank you message - appears on hover */}
-      <div
-        className={`absolute -top-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-orange-600 to-orange-500 text-white text-xs font-semibold rounded-full shadow-lg whitespace-nowrap transition-all duration-300 ${isHovered && !showMessage ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-          }`}
-      >
+      <div className={`absolute -top-2 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-semibold rounded-full shadow-lg whitespace-nowrap transition-all duration-300 ${isHovered && !showMessage ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`} style={{ background: 'rgba(74,127,167,0.12)', color: 'var(--color-light)' }}>
         Click me! 🎮
       </div>
 
@@ -154,14 +148,7 @@ const Corner3D: React.FC = () => {
           }}
         >
           {/* Cute emoji animal with glow effect */}
-          <div
-            className={`text-6xl select-none drop-shadow-2xl transition-all duration-300 ${isHovered ? 'filter brightness-125' : ''
-              }`}
-            style={{
-              transform: 'translateZ(48px)',
-              textShadow: isHovered ? '0 0 20px rgba(253, 128, 46, 0.6)' : 'none',
-            }}
-          >
+          <div className={`text-6xl select-none drop-shadow-2xl transition-all duration-300 ${isHovered ? 'filter brightness-125' : ''}`} style={{ transform: 'translateZ(48px)', textShadow: isHovered ? '0 0 20px rgba(74,127,167,0.45)' : 'none' }}>
             <span role="img" aria-label="animal" className="inline-block transition-transform duration-300">
               {emojis[currentEmoji]}
             </span>
@@ -170,9 +157,7 @@ const Corner3D: React.FC = () => {
       </div>
 
       {/* Ripple effect on click */}
-      {isJumping && (
-        <div className="absolute inset-0 rounded-full border-4 border-pumpkin animate-ping opacity-75"></div>
-      )}
+      {isJumping && <div className="absolute inset-0 rounded-full" style={{ border: '4px solid rgba(74,127,167,0.18)' }} />}
     </div>
   );
 };

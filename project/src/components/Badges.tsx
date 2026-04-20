@@ -17,17 +17,23 @@ const Badges: React.FC = () => {
   };
 
   return (
-    <section id="badges" className="py-20 bg-gradient-to-b from-[#0d2137] via-[#0c1929] to-[#0d2137] relative border-t border-orange-600/20">
+    <section id="badges" className="py-20 surface-bg relative border-t border-accent">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-orange-500/20 to-orange-500/20 rounded-full blur-3xl"></div>
+        <div
+          className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, var(--accent-15) 0%, transparent 60%)' }}
+        />
+        <div
+          className="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl"
+          style={{ background: 'radial-gradient(circle, var(--accent-10) 0%, transparent 60%)' }}
+        />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-6">
-            <div className="p-3 bg-gradient-to-r from-orange-600 to-orange-500 rounded-xl shadow-lg">
+            <div className="p-3 rounded-xl shadow-lg" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
               <Shield size={32} className="text-white" />
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold text-white drop-shadow-lg">
@@ -40,19 +46,19 @@ const Badges: React.FC = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {badges.map((badge, index) => {
+              {badges.map((badge, index) => {
             const isExpanded = expandedBadges.includes(index);
             const shouldTruncate = badge.description.length > 100;
 
             return (
               <div
                 key={index}
-                className={`group bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 shadow-2xl hover:shadow-orange-600/20 transition-all duration-500 hover:border-orange-600/50 relative flex flex-col ${isExpanded ? 'h-auto' : 'h-[420px]'
+                className={`group glass-effect rounded-2xl p-6 shadow-2xl hover:shadow-lg transition-all duration-500 relative flex flex-col ${isExpanded ? 'h-auto' : 'h-[420px]'
                   }`}
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="px-2 py-1 bg-pumpkin rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300 flex-shrink-0 flex items-center justify-center">
+                  <div className="px-2 py-1 rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300 flex-shrink-0 flex items-center justify-center" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
                     <span className="text-white font-semibold text-[10px] text-center uppercase tracking-wider leading-tight whitespace-nowrap">
                       {badge.issuer.length > 15 ? badge.issuer.substring(0, 15) + '...' : badge.issuer}
                     </span>
@@ -61,27 +67,28 @@ const Badges: React.FC = () => {
                     href={badge.verificationUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-2 py-1 bg-orange-600/20 border border-orange-600/30 rounded-md hover:bg-orange-600/30 transition-colors duration-200 opacity-0 group-hover:opacity-100 flex-shrink-0"
+                    className="flex items-center gap-1 px-2 py-1 rounded-md transition-colors duration-200 opacity-0 group-hover:opacity-100 flex-shrink-0"
+                    style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)' }}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <span className="text-xs text-orange-500 font-medium">Verify</span>
-                    <ExternalLink size={12} className="text-orange-500" />
+                    <span className="text-xs muted font-medium">Verify</span>
+                    <ExternalLink size={12} style={{ color: 'var(--color-accent)' }} />
                   </a>
                 </div>
 
                 {/* Content */}
                 <div className="flex-1 flex flex-col min-h-0">
-                  <h3 className="text-lg font-bold text-white group-hover:text-orange-500 transition-colors duration-300 line-clamp-2 mb-3">
+                  <h3 className="text-lg font-bold text-white transition-colors duration-300 line-clamp-2 mb-3">
                     {badge.title}
                   </h3>
 
                   <div className="flex items-center gap-2 text-gray-400 mb-2">
-                    <Star size={16} className="text-orange-500 flex-shrink-0" />
+                    <Star size={16} style={{ color: 'var(--color-accent)' }} />
                     <span className="text-sm font-medium truncate">{badge.issuer}</span>
                   </div>
 
                   <div className="flex items-center gap-2 text-gray-400 mb-3">
-                    <CheckCircle size={16} className="text-orange-500 flex-shrink-0" />
+                    <CheckCircle size={16} style={{ color: 'var(--color-accent)' }} />
                     <span className="text-sm">{badge.date}</span>
                   </div>
 
@@ -93,7 +100,7 @@ const Badges: React.FC = () => {
                     {shouldTruncate && (
                       <button
                         onClick={() => toggleExpand(index)}
-                        className="flex items-center gap-1 text-orange-500 text-xs font-medium mt-2 hover:text-cyan-300 transition-colors"
+                        className="flex items-center gap-1 muted text-xs font-medium mt-2 transition-colors"
                       >
                         {isExpanded ? (
                           <>
@@ -111,14 +118,15 @@ const Badges: React.FC = () => {
                   {/* View Badge Link */}
                   <div className="flex items-center justify-between pt-3 border-t border-slate-700/50 mt-auto">
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse flex-shrink-0"></div>
-                      <span className="text-xs text-orange-500 font-medium">Earned</span>
+                      <div className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: 'var(--color-accent)' }}></div>
+                      <span className="text-xs muted font-medium">Earned</span>
                     </div>
                     <a
                       href={badge.verificationUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3 py-1 bg-orange-600/20 border border-orange-600/30 rounded-full hover:bg-orange-600/30 transition-colors duration-200 text-xs text-cyan-300 font-medium whitespace-nowrap"
+                      className="px-3 py-1 rounded-full transition-colors duration-200 text-xs text-light font-medium whitespace-nowrap"
+                      style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)' }}
                     >
                       View Badge
                     </a>
@@ -126,7 +134,7 @@ const Badges: React.FC = () => {
                 </div>
 
                 {/* Hover Effect Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-r ${badge.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl pointer-events-none`}></div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl pointer-events-none" style={{ background: 'linear-gradient(90deg, rgba(74,127,167,0.06), rgba(179,207,229,0.03))' }}></div>
               </div>
             );
           })}

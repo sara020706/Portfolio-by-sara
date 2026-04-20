@@ -7,9 +7,9 @@ export const defaultProjects: Project[] = [
         tags: ['Django 5.2', 'HTML', 'TailwindCSS', 'Python 3.13'],
         github: 'https://github.com/sara020706/amortization-table',
         live: 'https://amortization-table.onrender.com/',
-        gradient: 'from-orange-600 via-orange-500 to-amber-500',
+        gradient: '',
         icon: 'Code2',
-        iconColor: 'text-orange-100'
+        iconColor: 'text-light'
     },
     {
         title: 'Day-Wise',
@@ -17,9 +17,9 @@ export const defaultProjects: Project[] = [
         tags: ['React', 'TypeScript', 'Capacitor', 'Tailwind CSS'],
         github: 'https://github.com/sara020706/Day-Wise',
         live: 'https://github.com/sara020706/Day-Wise',
-        gradient: 'from-orange-500 via-orange-600 to-orange-700',
+        gradient: '',
         icon: 'Smartphone',
-        iconColor: 'text-orange-100'
+        iconColor: 'text-light'
     },
     {
         title: 'Focus Sense',
@@ -27,9 +27,9 @@ export const defaultProjects: Project[] = [
         tags: ['React 18 + TypeScript + Vite', 'Tailwind CSS', 'Lucide React', 'React Router', 'Capacitor', 'SQLite (Android) + IndexedDB (Web)', 'React Context + useReducer'],
         github: 'https://github.com/sara020706/focus-sense',
         live: 'https://github.com/sara020706/focus-sense',
-        gradient: 'from-orange-500 via-orange-600 to-red-600',
+        gradient: '',
         icon: 'Timer',
-        iconColor: 'text-orange-100'
+        iconColor: 'text-light'
     },
     {
         title: 'Flames-By--Sara',
@@ -37,8 +37,8 @@ export const defaultProjects: Project[] = [
         tags: ['React 18 (with Vite) ⚡', 'TailwindCSS 🎨', 'Lucide React (for icons) 🔥'],
         github: 'https://github.com/sara020706/Flames-By--Sara',
         live: 'https://flames-by-sara.vercel.app/',
-        gradient: 'from-pink-500 via-orange-500 to-orange-600',
+        gradient: '',
         icon: 'Heart',
-        iconColor: 'text-pink-100'
+        iconColor: 'text-light'
     }
 ];

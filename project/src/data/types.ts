@@ -4,6 +4,7 @@ export interface Certification {
     date: string;
     verificationUrl: string;
     pdfUrl: string;
+    description?: string;
     color?: string;
 }
 

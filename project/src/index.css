@@ -18,23 +18,45 @@ body {
   line-height: 1.5;
 }
 
+:root{
+  /* Strict five-colour system */
+  --color-bg: #0A1931; /* deep navy */
+  --color-surface: #1A3D63; /* ocean blue */
+  --color-primary: #4A7FA7; /* steel blue */
+  --color-accent: #B3CFE5; /* sky mist */
+  --color-light: #F6FAFD; /* near white */
+
+  /* helper opacities */
+  --accent-15: rgba(179,207,229,0.15);
+  --accent-10: rgba(179,207,229,0.10);
+  --primary-glow: rgba(74,127,167,0.4);
+}
+
 @layer base {
   body {
-    @apply dark:text-white dark:bg-slate-900 text-gray-900 bg-gray-50;
+    color: var(--color-light);
+    background: var(--color-bg);
   }
 }
 
 @layer components {
   .glass-effect {
-    @apply dark:bg-slate-800/30 bg-white/30 backdrop-blur-md border dark:border-slate-700/50 border-gray-200/50;
+    background: rgba(26,61,99,0.5); /* var(--color-surface) at 50% */
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--accent-10);
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent;
+    background: linear-gradient(90deg,var(--color-primary),var(--color-accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   .dark-card {
-    @apply dark:bg-slate-800/30 bg-white/80 backdrop-blur-sm border dark:border-slate-700/50 border-gray-200/50;
+    background: rgba(26,61,99,0.5);
+    border: 1px solid var(--accent-10);
+    backdrop-filter: blur(8px);
   }
 }
 
@@ -44,16 +66,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  @apply dark:bg-slate-900 bg-gray-100;
+  background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #FD802E, #E66A1A);
-  @apply rounded-full;
+  background: linear-gradient(180deg,var(--color-primary),var(--color-accent));
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #FE9A56, #FD802E);
+  background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
 }
 
 /* Custom Animations */
@@ -87,11 +109,11 @@ body {
 
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(255, 117, 24, 0.3);
+    box-shadow: 0 0 20px var(--primary-glow);
   }
 
   50% {
-    box-shadow: 0 0 40px rgba(255, 117, 24, 0.6);
+    box-shadow: 0 0 40px var(--primary-glow);
   }
 }
 
@@ -130,8 +152,20 @@ body {
   transition-duration: 150ms;
 }
 
-/* Selection - Pumpkin accent */
+/* Selection - Accent */
 ::selection {
-  background-color: rgba(253, 128, 46, 0.3);
-  color: white;
+  background-color: rgba(74,127,167,0.25);
+  color: var(--color-light);
 }
+
+/* Utility surfaces */
+.surface-bg{ background: linear-gradient(135deg,var(--color-bg) 0%, var(--color-surface) 60%, var(--color-primary) 100%); }
+.surface{ background: var(--color-surface); color: var(--color-accent); border: 1px solid var(--accent-15); }
+.btn-primary{ background: var(--color-primary); color: var(--color-light); box-shadow: 0 0 20px var(--primary-glow); }
+.muted{ color: var(--color-accent); }
+.text-light{ color: var(--color-light); }
+.border-accent{ border: 1px solid var(--accent-15); }
+
+/* progress indicator */
+.scroll-progress{ position: fixed; right: 12px; top: 16px; width:4px; height: 70vh; background: rgba(255,255,255,0.03); border-radius: 999px; overflow: hidden; z-index:60 }
+.scroll-progress > i{ display:block; width:100%; height:0%; background: linear-gradient(var(--color-primary),var(--color-accent)); }

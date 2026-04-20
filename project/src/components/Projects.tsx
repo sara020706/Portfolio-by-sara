@@ -19,11 +19,11 @@ const Projects: React.FC = () => {
   const [projects] = useLocalStorage<Project[]>('portfolio_projects', defaultProjects);
 
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-[#0d2137] via-[#0c1929] to-[#0d2137] relative border-t border-orange-600/20">
+    <section id="projects" className="py-20 relative border-t border-accent surface-bg">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-40 right-40 w-80 h-80 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 left-40 w-96 h-96 bg-gradient-to-tr from-orange-500/20 to-orange-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-40 right-40 w-80 h-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(179,207,229,0.14), rgba(74,127,167,0.04))' }}></div>
+        <div className="absolute bottom-40 left-40 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(74,127,167,0.12), rgba(179,207,229,0.02))' }}></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,13 +39,11 @@ const Projects: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => {
             const IconComponent = iconMap[project.icon] || Folder;
-            return (
-              <div
-                key={index}
-                className="group bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl hover:shadow-orange-600/20 transition-all duration-500 hover:transform hover:scale-[1.02] hover:border-orange-600/30"
-              >
+              return (
+              <div key={index} className="group surface glass-effect border-accent rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:transform hover:scale-[1.02]">
+              
                 {/* Gradient Header with Icon */}
-                <div className={`relative overflow-hidden bg-gradient-to-br ${project.gradient} h-48 flex items-center justify-center`}>
+                <div className={`relative overflow-hidden h-48 flex items-center justify-center`} style={{ background: 'linear-gradient(135deg,var(--color-primary), var(--color-accent))' }}>
                   {/* Animated Background Pattern */}
                   <div className="absolute inset-0 opacity-20">
                     <div className="absolute top-0 left-0 w-full h-full">
@@ -57,7 +55,7 @@ const Projects: React.FC = () => {
 
                   {/* Large Icon */}
                   <div className="relative z-10 transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-                    <IconComponent size={80} className={`${project.iconColor} drop-shadow-2xl`} strokeWidth={1.5} />
+                    <IconComponent size={80} className={`text-light drop-shadow-2xl`} strokeWidth={1.5} />
                   </div>
 
                   {/* Project Links Overlay */}
@@ -90,7 +88,7 @@ const Projects: React.FC = () => {
 
                 {/* Project Content */}
                 <div className="p-6 space-y-4">
-                  <h3 className="text-xl font-bold text-white group-hover:text-orange-500 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-light transition-colors duration-300">
                     {project.title}
                   </h3>
                   <p className="text-gray-300 leading-relaxed">
@@ -100,10 +98,7 @@ const Projects: React.FC = () => {
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-slate-700/50 border border-slate-600/50 text-orange-400 rounded-full text-sm font-medium hover:bg-orange-600/10 hover:border-orange-500/50 transition-all duration-200"
-                      >
+                      <span key={tag} className="px-3 py-1 bg-[rgba(26,61,99,0.12)] border border-accent text-light rounded-full text-sm font-medium transition-all duration-200">
                         {tag}
                       </span>
                     ))}
@@ -115,7 +110,7 @@ const Projects: React.FC = () => {
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-orange-500 font-medium hover:gap-3 transition-all duration-300 hover:text-orange-400"
+                      className="inline-flex items-center gap-2 text-light font-medium hover:gap-3 transition-all duration-300 hover:text-light"
                     >
                       View Project
                       <ArrowRight size={16} />
@@ -129,12 +124,7 @@ const Projects: React.FC = () => {
 
         {/* View All Projects Button */}
         <div className="text-center mt-12">
-          <a
-            href="https://github.com/sara020706"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-700 to-orange-700 border border-orange-500/20 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-orange-600 hover:border-orange-600/50 transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-orange-600/20 backdrop-blur-sm"
-          >
+          <a href="https://github.com/sara020706" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 btn-primary font-semibold rounded-xl transform hover:scale-105 transition-all duration-300 shadow-2xl backdrop-blur-sm">
             View All Projects
             <Github size={20} />
           </a>
