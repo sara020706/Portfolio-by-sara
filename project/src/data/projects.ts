@@ -55,7 +55,7 @@ export const defaultProjects: Project[] = [
         image: 'https://lh3.googleusercontent.com/d/1E1xaruPuKF_-nPrC7yXyqDHYD2bBE4f9'
     },
     {
-        title: 'decdir',
+        title: 'decidr',
         description: 'The decidr is coin toss based decision maker where you are stuck in between choices ',
         tags: ['React 18 (with Vite) ⚡', 'TailwindCSS 🎨', 'Lucide React (for icons) 🔥'],
         github: 'https://github.com/sara020706/the-decision-maker-',
