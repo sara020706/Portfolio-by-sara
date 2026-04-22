@@ -29,17 +29,17 @@ const About: React.FC = () => {
       <div className="absolute inset-0 overflow-hidden">
         <div
           className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, var(--accent-15) 0%, transparent 60%)' }}
+          style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 60%)' }}
         />
         <div
           className="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, var(--accent-10) 0%, transparent 60%)' }}
+          style={{ background: 'radial-gradient(circle, rgba(251,146,60,0.08) 0%, transparent 60%)' }}
         />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 drop-shadow-lg gradient-text" style={{ fontFamily: 'var(--font-display)' }}>
             About Me
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -54,10 +54,10 @@ const About: React.FC = () => {
                 src="/img1.jpg"
                 alt="Parthasarathy"
                 className="w-full max-w-md mx-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
-                style={{ border: '2px solid rgba(179,207,229,0.12)' }}
+                style={{ border: '2px solid rgba(245,158,11,0.18)' }}
               />
             </div>
-            <div className="absolute inset-0 rounded-2xl blur-3xl opacity-50 -z-10 transform scale-110" style={{ background: 'linear-gradient(90deg, rgba(74,127,167,0.08), rgba(179,207,229,0.04))' }}></div>
+            <div className="absolute inset-0 rounded-2xl blur-3xl opacity-40 -z-10 transform scale-110" style={{ background: 'linear-gradient(90deg, rgba(245,158,11,0.10), rgba(252,211,77,0.05))' }}></div>
           </div>
 
           {/* Content */}

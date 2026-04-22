@@ -9,7 +9,8 @@ export const defaultProjects: Project[] = [
         live: 'https://amortization-table.onrender.com/',
         gradient: '',
         icon: 'Code2',
-        iconColor: 'text-light'
+        iconColor: 'text-light',
+        image: 'https://images.unsplash.com/photo-1554224155-6726b3fb858f?q=80&w=2022&auto=format&fit=crop'
     },
     {
         title: 'Day-Wise',
@@ -19,7 +20,8 @@ export const defaultProjects: Project[] = [
         live: 'https://github.com/sara020706/Day-Wise',
         gradient: '',
         icon: 'Smartphone',
-        iconColor: 'text-light'
+        iconColor: 'text-light',
+        image: 'https://images.unsplash.com/photo-1506784365847-bbad939e9335?q=80&w=2068&auto=format&fit=crop'
     },
     {
         title: 'Focus Sense',
@@ -29,7 +31,8 @@ export const defaultProjects: Project[] = [
         live: 'https://github.com/sara020706/focus-sense',
         gradient: '',
         icon: 'Timer',
-        iconColor: 'text-light'
+        iconColor: 'text-light',
+        image: 'https://images.unsplash.com/photo-1495364141860-b0d0397a0273?q=80&w=2070&auto=format&fit=crop'
     },
     {
         title: 'Flames-By--Sara',
@@ -39,6 +42,7 @@ export const defaultProjects: Project[] = [
         live: 'https://flames-by-sara.vercel.app/',
         gradient: '',
         icon: 'Heart',
-        iconColor: 'text-light'
+        iconColor: 'text-light',
+        image: 'https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?q=80&w=2070&auto=format&fit=crop'
     }
 ];

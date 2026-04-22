@@ -48,13 +48,13 @@ const Contact: React.FC = () => {
     <section id="contact" className="py-20 relative border-t border-accent surface-bg">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-20 w-80 h-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(179,207,229,0.14), rgba(74,127,167,0.04))' }}></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(74,127,167,0.12), rgba(179,207,229,0.02))' }}></div>
+        <div className="absolute top-20 left-20 w-80 h-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.12), rgba(251,146,60,0.04))' }}></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(252,211,77,0.08), rgba(245,158,11,0.02))' }}></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 drop-shadow-lg gradient-text" style={{ fontFamily: 'var(--font-display)' }}>
             Get In Touch
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -71,7 +71,7 @@ const Contact: React.FC = () => {
               </h3>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-lg" style={{ background: 'rgba(74,127,167,0.08)', border: '1px solid rgba(179,207,229,0.06)' }}>
+                  <div className="p-3 rounded-lg" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.14)' }}>
                     <Mail size={24} className="text-light" />
                   </div>
                   <div>
@@ -82,7 +82,7 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-lg" style={{ background: 'rgba(74,127,167,0.08)', border: '1px solid rgba(179,207,229,0.06)' }}>
+                  <div className="p-3 rounded-lg" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.14)' }}>
                     <Phone size={24} className="text-light" />
                   </div>
                   <div>
@@ -93,7 +93,7 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="p-3 rounded-lg" style={{ background: 'rgba(74,127,167,0.08)', border: '1px solid rgba(179,207,229,0.06)' }}>
+                  <div className="p-3 rounded-lg" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.14)' }}>
                     <MapPin size={24} className="text-light" />
                   </div>
                   <div>
@@ -116,13 +116,13 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 shadow-2xl">
+          <div className="rounded-2xl p-8 shadow-2xl" style={{ background: 'rgba(31,41,55,0.60)', backdropFilter: 'blur(14px)', border: '1px solid rgba(245,158,11,0.12)' }}>
             <h3 className="text-2xl font-bold text-white mb-6">
               Send Message
             </h3>
 
             {isSubmitted && (
-              <div className="mb-6 p-4" style={{ background: 'rgba(179,207,229,0.08)', border: '1px solid rgba(74,127,167,0.08)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div className="mb-6 p-4" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.15)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <CheckCircle size={20} className="text-light" />
                 <p className="muted font-medium">✅ Thank you! Your message has been sent successfully.</p>
               </div>

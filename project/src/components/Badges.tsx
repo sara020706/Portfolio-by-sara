@@ -1,145 +1,330 @@
-import React, { useState } from 'react';
-import { Shield, ExternalLink, Star, CheckCircle, ChevronDown, ChevronUp } from 'lucide-react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import React, { useRef, useCallback } from 'react';
+import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+
 import { defaultBadges } from '../data/badges';
-import { Badge as BadgeType } from '../data/types';
+import { Badge } from '../data/types';
 
-const Badges: React.FC = () => {
-  const [expandedBadges, setExpandedBadges] = useState<number[]>([]);
-  const [badges] = useLocalStorage<BadgeType[]>('portfolio_badges', defaultBadges);
-
-  const toggleExpand = (index: number) => {
-    setExpandedBadges(prev =>
-      prev.includes(index)
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
+const brandTheme = (issuer: string) => {
+  const norm = issuer.toLowerCase();
+  if (norm.includes('altair')) {
+    return {
+      gradient: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)',
+      accent: '#3B82F6',
+      glow: 'rgba(37,99,235,0.3)',
+      initial: 'A',
+    };
+  }
+  if (norm.includes('cisco')) {
+    return {
+      gradient: 'linear-gradient(135deg, #06B6D4 0%, #2563EB 100%)',
+      accent: '#0EA5E9',
+      glow: 'rgba(14,165,233,0.3)',
+      initial: 'C',
+    };
+  }
+  if (norm.includes('google')) {
+    return {
+      gradient: 'linear-gradient(135deg, #F59E0B 0%, #EF4444 50%, #10B981 100%)',
+      accent: '#F59E0B',
+      glow: 'rgba(245,158,11,0.3)',
+      initial: 'G',
+    };
+  }
+  // Default fallback (golden hour)
+  return {
+    gradient: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))',
+    accent: 'var(--color-primary)',
+    glow: 'rgba(245,158,11,0.3)',
+    initial: 'B',
   };
+};
+
+const BadgeCard = ({ badge }: { badge: Badge }) => {
+  const theme = brandTheme(badge.issuer);
 
   return (
-    <section id="badges" className="py-20 surface-bg relative border-t border-accent">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, var(--accent-15) 0%, transparent 60%)' }}
-        />
-        <div
-          className="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, var(--accent-10) 0%, transparent 60%)' }}
-        />
-      </div>
+    <article
+      className="badge-card-item relative flex-shrink-0 flex flex-col justify-between select-none group"
+      style={{
+        width: '320px',
+        minHeight: '260px',
+        borderRadius: '20px',
+        background: 'rgba(17,24,39,0.82)',
+        border: '1px solid rgba(245,158,11,0.10)',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.30)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        scrollSnapAlign: 'start',
+        cursor: 'default',
+        padding: '28px 24px 22px',
+        overflow: 'hidden',
+        zIndex: 1,
+        '--card-glow': theme.glow,
+      } as React.CSSProperties}
+    >
+      {/* Top gradient bar */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '3px',
+          background: theme.gradient,
+          borderRadius: '20px 20px 0 0',
+        }}
+      />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="p-3 rounded-xl shadow-lg" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
-              <Shield size={32} className="text-white" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white drop-shadow-lg">
-              Badges & Achievements
-            </h2>
-          </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Recognition and achievements earned through contributions, participation, and excellence in the developer community.
+      {/* Watermark initial */}
+      <span
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          right: '-12px',
+          top: '-20px',
+          fontSize: '160px',
+          fontWeight: 900,
+          lineHeight: 1,
+          letterSpacing: '-8px',
+          background: theme.gradient,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          opacity: 0.07,
+          userSelect: 'none',
+          pointerEvents: 'none',
+          fontFamily: 'var(--font-display)',
+        }}
+      >
+        {theme.initial}
+      </span>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col gap-2 flex-1">
+        {/* Issuer pill */}
+        <span
+          style={{
+            display: 'inline-flex',
+            alignSelf: 'flex-start',
+            padding: '3px 10px',
+            borderRadius: '999px',
+            fontSize: '10px',
+            fontWeight: 700,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            background: `linear-gradient(90deg, ${theme.accent}22, ${theme.accent}11)`,
+            border: `1px solid ${theme.accent}44`,
+            color: theme.accent,
+            marginBottom: '6px',
+          }}
+        >
+          {badge.issuer}
+        </span>
+
+        {/* Title */}
+        <h3
+          style={{
+            fontSize: '16px',
+            fontWeight: 700,
+            color: '#f6fafd',
+            lineHeight: 1.35,
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}
+        >
+          {badge.title}
+        </h3>
+
+        {/* Description */}
+        <p style={{
+          fontSize: '13px',
+          color: 'rgba(179,207,229,0.7)',
+          lineHeight: 1.5,
+          marginTop: '8px',
+          display: '-webkit-box',
+          WebkitLineClamp: 4,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
+          flex: 1
+        }}>
+          {badge.description}
+        </p>
+
+        {/* Bottom row */}
+        <div style={{ marginTop: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <p style={{ fontSize: '12px', color: 'rgba(179,207,229,0.4)', fontWeight: 500 }}>
+            {badge.date}
           </p>
-        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {badges.map((badge, index) => {
-            const isExpanded = expandedBadges.includes(index);
-            const shouldTruncate = badge.description.length > 100;
-
-            return (
-              <div
-                key={index}
-                className={`group glass-effect rounded-2xl p-6 shadow-2xl hover:shadow-lg transition-all duration-500 relative flex flex-col ${isExpanded ? 'h-auto' : 'h-[420px]'
-                  }`}
-              >
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="px-2 py-1 rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300 flex-shrink-0 flex items-center justify-center" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
-                    <span className="text-white font-semibold text-[10px] text-center uppercase tracking-wider leading-tight whitespace-nowrap">
-                      {badge.issuer.length > 15 ? badge.issuer.substring(0, 15) + '...' : badge.issuer}
-                    </span>
-                  </div>
-                  <a
-                    href={badge.verificationUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-2 py-1 rounded-md transition-colors duration-200 opacity-0 group-hover:opacity-100 flex-shrink-0"
-                    style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)' }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <span className="text-xs muted font-medium">Verify</span>
-                    <ExternalLink size={12} style={{ color: 'var(--color-accent)' }} />
-                  </a>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 flex flex-col min-h-0">
-                  <h3 className="text-lg font-bold text-white transition-colors duration-300 line-clamp-2 mb-3">
-                    {badge.title}
-                  </h3>
-
-                  <div className="flex items-center gap-2 text-gray-400 mb-2">
-                    <Star size={16} style={{ color: 'var(--color-accent)' }} />
-                    <span className="text-sm font-medium truncate">{badge.issuer}</span>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-gray-400 mb-3">
-                    <CheckCircle size={16} style={{ color: 'var(--color-accent)' }} />
-                    <span className="text-sm">{badge.date}</span>
-                  </div>
-
-                  <div className={`mb-3 ${isExpanded ? '' : 'flex-1 overflow-hidden'}`}>
-                    <p className={`text-gray-300 text-sm leading-relaxed ${!isExpanded && shouldTruncate ? 'line-clamp-3' : ''
-                      }`}>
-                      {badge.description}
-                    </p>
-                    {shouldTruncate && (
-                      <button
-                        onClick={() => toggleExpand(index)}
-                        className="flex items-center gap-1 muted text-xs font-medium mt-2 transition-colors"
-                      >
-                        {isExpanded ? (
-                          <>
-                            Show less <ChevronUp size={14} />
-                          </>
-                        ) : (
-                          <>
-                            Show more <ChevronDown size={14} />
-                          </>
-                        )}
-                      </button>
-                    )}
-                  </div>
-
-                  {/* View Badge Link */}
-                  <div className="flex items-center justify-between pt-3 border-t border-slate-700/50 mt-auto">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: 'var(--color-accent)' }}></div>
-                      <span className="text-xs muted font-medium">Earned</span>
-                    </div>
-                    <a
-                      href={badge.verificationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-3 py-1 rounded-full transition-colors duration-200 text-xs text-light font-medium whitespace-nowrap"
-                      style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)' }}
-                    >
-                      View Badge
-                    </a>
-                  </div>
-                </div>
-
-                {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl pointer-events-none" style={{ background: 'linear-gradient(90deg, rgba(74,127,167,0.06), rgba(179,207,229,0.03))' }}></div>
-              </div>
-            );
-          })}
+          <a
+            href={badge.verificationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              padding: '6px 14px',
+              borderRadius: '999px',
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '12px',
+              fontWeight: 500,
+              color: '#fff',
+              textDecoration: 'none',
+              transition: 'background 0.2s',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.08)')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.03)')}
+          >
+            <ExternalLink size={12} /> Verify
+          </a>
         </div>
       </div>
+    </article>
+  );
+};
+
+const ArrowBtn = ({ dir, onClick }: { dir: 'left' | 'right'; onClick: () => void }) => (
+  <button
+    onClick={onClick}
+    aria-label={`Scroll ${dir}`}
+    style={{
+      width: '40px',
+      height: '40px',
+      borderRadius: '50%',
+      background: 'rgba(255,255,255,0.05)',
+      border: '1px solid rgba(245,158,11,0.18)',
+      backdropFilter: 'blur(10px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'rgba(245,158,11,0.8)',
+      cursor: 'pointer',
+      transition: 'background 0.2s ease, transform 0.2s ease',
+      flexShrink: 0,
+    }}
+    onMouseEnter={e => {
+      (e.currentTarget as HTMLElement).style.background = 'rgba(245,158,11,0.15)';
+      (e.currentTarget as HTMLElement).style.transform = 'scale(1.08)';
+    }}
+    onMouseLeave={e => {
+      (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)';
+      (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+    }}
+  >
+    {dir === 'left' ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
+  </button>
+);
+
+const Badges: React.FC = () => {
+  const badges = defaultBadges;
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = useCallback((dir: 'left' | 'right') => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({ left: dir === 'left' ? -340 : 340, behavior: 'smooth' });
+  }, []);
+
+  return (
+    <section id="badges" className="relative py-16 surface-bg border-t border-accent" style={{ overflow: 'visible' }}>
+      {/* Ambient blobs */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div style={{ position: 'absolute', top: '10%', right: '-8%', width: '420px', height: '420px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%)', filter: 'blur(40px)' }} />
+        <div style={{ position: 'absolute', bottom: '5%', left: '-5%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(251,146,60,0.07) 0%, transparent 70%)', filter: 'blur(50px)' }} />
+      </div>
+
+      <div className="relative z-10 max-w-screen-xl mx-auto px-6 sm:px-8 lg:px-10">
+        {/* Header */}
+        <div className="mb-12">
+          <p style={{ fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(245,158,11,0.55)', marginBottom: '10px' }}>
+            Recognition &amp; Feedback
+          </p>
+          <div className="flex items-end justify-between gap-4 flex-wrap">
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+                fontWeight: 400,
+                color: '#f6fafd',
+                lineHeight: 1,
+              }}
+            >
+              Badges &amp; Honors
+            </h2>
+            {/* Arrow controls aligned to right */}
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <ArrowBtn dir="left" onClick={() => scroll('left')} />
+              <ArrowBtn dir="right" onClick={() => scroll('right')} />
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll wrapper */}
+        <div style={{ position: 'relative' }}>
+          {/* Horizontal scroll container */}
+          <div
+            ref={scrollRef}
+            style={{
+              display: 'flex',
+              gap: '20px',
+              overflowX: 'auto',
+              overflowY: 'visible',
+              scrollSnapType: 'x mandatory',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              paddingBottom: '24px',
+              paddingTop: '12px',
+              paddingLeft: '4px',
+              paddingRight: '4px',
+              cursor: 'grab',
+            }}
+            className="no-scroll-bar"
+            onMouseDown={e => {
+              const el = e.currentTarget;
+              el.style.cursor = 'grabbing';
+              const startX = e.pageX - el.offsetLeft;
+              const scrollLeft = el.scrollLeft;
+              const onMove = (me: MouseEvent) => {
+                el.scrollLeft = scrollLeft - (me.pageX - el.offsetLeft - startX);
+              };
+              const onUp = () => {
+                el.style.cursor = 'grab';
+                window.removeEventListener('mousemove', onMove);
+                window.removeEventListener('mouseup', onUp);
+              };
+              window.addEventListener('mousemove', onMove);
+              window.addEventListener('mouseup', onUp);
+            }}
+          >
+            {badges.map((badge, idx) => (
+              <BadgeCard key={idx} badge={badge} />
+            ))}
+          </div>
+        </div>
+
+        {/* Count */}
+        <p style={{ marginTop: '20px', fontSize: '12px', color: 'rgba(179,207,229,0.35)', textAlign: 'right' }}>
+          {badges.length} badges
+        </p>
+      </div>
+
+      {/* CSS hover rules */}
+      <style>{`
+        .no-scroll-bar::-webkit-scrollbar { display: none; }
+
+        .badge-card-item {
+          transform: translateZ(0);
+          will-change: transform;
+          transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
+        }
+        .badge-card-item:hover {
+          transform: translateY(-8px) scale(1.02) translateZ(0);
+          z-index: 10 !important;
+          box-shadow: 0 20px 48px var(--card-glow, rgba(245,158,11,0.35)), 0 4px 16px rgba(0,0,0,0.4) !important;
+        }
+      `}</style>
     </section>
   );
 };

@@ -13,8 +13,8 @@ const Footer: React.FC = () => {
     <footer className="relative text-light py-12 border-t border-accent surface-bg">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-32 bg-gradient-to-r from-teal-800/10 via-cyan-600/8 to-teal-900/6 blur-3xl"></div>
-        <div className="absolute bottom-0 right-10 w-72 h-40 bg-gradient-to-tr from-cyan-700/6 to-teal-900/8 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-32 blur-3xl" style={{ background: 'radial-gradient(ellipse, rgba(245,158,11,0.10) 0%, rgba(251,146,60,0.04) 60%, transparent 100%)' }}></div>
+        <div className="absolute bottom-0 right-10 w-72 h-40 rounded-full blur-3xl" style={{ background: 'radial-gradient(ellipse, rgba(252,211,77,0.07) 0%, transparent 80%)' }}></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
                   onClick={() => {
                     document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                className="muted hover:text-light transition-colors duration-200 text-left"
+                  className="muted hover:text-light transition-colors duration-200 text-left"
                 >
                   {link}
                 </button>
@@ -52,9 +52,9 @@ const Footer: React.FC = () => {
               {socialLinks.map((social) => {
                 const IconComponent = social.icon;
                 return (
-                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="p-3 glass-effect rounded-lg transform hover:scale-105 transition-all duration-300" aria-label={social.label}>
-                  <IconComponent size={20} className="text-light" />
-                </a>
+                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="p-3 glass-effect rounded-lg transform hover:scale-105 transition-all duration-300" aria-label={social.label}>
+                    <IconComponent size={20} className="text-light" />
+                  </a>
                 );
               })}
             </div>
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-slate-800/50 mt-12 pt-8 text-center">
           <p className="muted flex items-center justify-center gap-2">
-            Made with <Heart size={16} className="text-light" /> by Parthasarathy © {new Date().getFullYear()}
+            Made with <Heart size={16} style={{ color: 'var(--color-primary)' }} /> by Parthasarathy © {new Date().getFullYear()}
           </p>
         </div>
       </div>

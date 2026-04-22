@@ -9,7 +9,6 @@ import Codolio from './components/Codolio';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Corner3D from './components/Corner3D';
 
 // Admin panel removed — development-only panel was deleted per request
 
@@ -86,7 +85,6 @@ function App() {
         <Projects />
         <Contact />
         <Footer />
-        <Corner3D />
 
         {/* admin panel removed */}
       </div>

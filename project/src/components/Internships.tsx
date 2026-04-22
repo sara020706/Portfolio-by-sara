@@ -1,152 +1,224 @@
-import React from 'react';
-import { Briefcase, Calendar, ExternalLink, Award, Building } from 'lucide-react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import React, { useMemo } from 'react';
+import { Calendar, ExternalLink, Building, Globe, MapPin } from 'lucide-react';
 import { defaultInternships } from '../data/internships';
 import { Internship } from '../data/types';
 
-const Internships: React.FC = () => {
-  const [allInternships] = useLocalStorage<Internship[]>('portfolio_internships', defaultInternships);
-
-  // Filter by type
-  const virtualInternships = allInternships.filter(i => i.type === 'virtual');
+const TimelineNode = ({
+  internship,
+  isLeft
+}: {
+  internship: Internship,
+  isLeft: boolean
+}) => {
+  const isVirtual = internship.type === 'virtual';
 
   return (
-  <section id="internships" className="py-20 surface-bg relative border-t border-accent">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
+    <div className={`relative flex flex-col md:flex-row justify-between items-center w-full mb-8 md:mb-12 ${isLeft ? 'md:flex-row-reverse' : ''} group`}>
+
+      {/* Desktop Date Spacer */}
+      <div className="hidden md:flex w-5/12 items-center">
+        <div className={`w-full ${isLeft ? 'text-left pl-10' : 'text-right pr-10'}`}>
+          <span
+            className="text-lg font-bold tracking-wide transition-colors duration-300"
+            style={{ color: 'var(--color-muted)' }}
+          >
+            {internship.duration}
+          </span>
+        </div>
+      </div>
+
+      {/* The glowing dot */}
+      <div
+        className="absolute left-[1.35rem] md:left-1/2 w-3.5 h-3.5 rounded-full border-[2px] z-10 transition-all duration-500 transform -translate-x-1/2 group-hover:scale-150"
+        style={{
+          background: 'var(--color-bg)',
+          borderColor: 'var(--color-primary)',
+          boxShadow: '0 0 10px var(--amber- glow, rgba(245,158,11,0.5))'
+        }}
+      />
+
+      {/* Card Content */}
+      <div className="w-full pl-[4rem] md:pl-0 md:w-5/12 relative flex">
+        {/* We use ms-auto for right-aligned cards to dock them closer to the center, and max-w to keep them compact */}
         <div
-          className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, var(--accent-15) 0%, transparent 60%)' }}
+          className={`relative rounded-xl p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1.5 backdrop-blur-md w-full max-w-[420px] ${isLeft ? 'mr-auto' : 'ml-auto'}`}
+          style={{
+            background: 'rgba(17,24,39,0.7)',
+            border: '1px solid rgba(245,158,11,0.15)',
+            boxShadow: '0 6px 24px rgba(0,0,0,0.25)',
+          }}
+        >
+          {/* Card Hover Glow effect */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl pointer-events-none" style={{ boxShadow: 'inset 0 0 30px rgba(245,158,11,0.05)' }} />
+
+          {/* Header row: Company and Type Badge */}
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div
+                className="px-2.5 py-1 rounded-md shadow-sm flex items-center justify-center transform group-hover:scale-105 transition-transform duration-300"
+                style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-hover))' }}
+              >
+                <span className="text-white font-bold text-[9px] tracking-wider uppercase">
+                  {internship.company.length > 20 ? internship.company.substring(0, 20) + '...' : internship.company}
+                </span>
+              </div>
+
+              {/* Type Badge */}
+              <div
+                className="px-2 py-1 rounded-md flex items-center gap-1 border"
+                style={{
+                  background: isVirtual ? 'rgba(59, 130, 246, 0.1)' : 'rgba(16, 185, 129, 0.1)',
+                  borderColor: isVirtual ? 'rgba(59, 130, 246, 0.2)' : 'rgba(16, 185, 129, 0.2)',
+                }}
+              >
+                {isVirtual ?
+                  <Globe size={10} style={{ color: '#3B82F6' }} /> :
+                  <MapPin size={10} style={{ color: '#10B981' }} />
+                }
+                <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: isVirtual ? '#3B82F6' : '#10B981' }}>
+                  {internship.type}
+                </span>
+              </div>
+            </div>
+
+            {internship.certificate && internship.certificate !== '#' && (
+              <a
+                href={internship.certificate}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1 px-2.5 py-1 rounded-md"
+                style={{ background: 'var(--amber-10)', border: '1px solid var(--amber-15)' }}
+              >
+                <span className="text-[10px] font-semibold" style={{ color: 'var(--color-primary)' }}>Verify</span>
+                <ExternalLink size={12} style={{ color: 'var(--color-primary)' }} />
+              </a>
+            )}
+          </div>
+
+          <h3 className="text-lg font-bold text-white mb-1.5 tracking-tight leading-snug">
+            {internship.title}
+          </h3>
+
+          <div className="flex items-center gap-2 mb-3">
+            <Building size={14} style={{ color: 'var(--color-primary)' }} />
+            <span className="text-xs font-medium" style={{ color: 'var(--color-muted)' }}>{internship.company}</span>
+          </div>
+
+          {/* Mobile date format */}
+          <div className="md:hidden flex items-center gap-2 mb-3">
+            <Calendar size={12} style={{ color: 'var(--color-primary)' }} />
+            <span className="text-xs font-bold" style={{ color: 'var(--color-accent)' }}>{internship.duration}</span>
+          </div>
+
+          <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--color-light)', opacity: 0.85 }}>
+            {internship.description}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5">
+            {internship.skills.map((skill) => (
+              <span
+                key={skill}
+                className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide"
+                style={{
+                  background: 'rgba(245,158,11,0.08)',
+                  border: '1px solid rgba(245,158,11,0.2)',
+                  color: 'var(--color-accent)'
+                }}
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Internships: React.FC = () => {
+  const sortedInternships = useMemo(() => {
+    return [...defaultInternships].sort((a, b) => {
+      // Very basic date extraction assuming formats like "Jul 2025 - Sep 2025" or "Jul 2025"
+      // We'll split by '-' and take the first part to get the start date
+      const getStartDate = (duration: string) => {
+        const parts = duration.split('-');
+        if (parts.length > 0) {
+          const parsed = Date.parse(parts[0].trim());
+          return isNaN(parsed) ? 0 : parsed;
+        }
+        return 0;
+      };
+
+      return getStartDate(a.duration) - getStartDate(b.duration);
+    });
+  }, []);
+
+  return (
+    <section id="internships" className="py-20 relative" style={{ background: 'var(--color-surface)', overflow: 'hidden' }}>
+
+      {/* Golden accent line divider at the top */}
+      <div className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent)' }} />
+
+      {/* Ambient background glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full mix-blend-screen"
+          style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%)', filter: 'blur(60px)' }}
         />
         <div
-          className="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: 'radial-gradient(circle, var(--accent-10) 0%, transparent 60%)' }}
+          className="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] rounded-full mix-blend-screen"
+          style={{ background: 'radial-gradient(circle, rgba(251,146,60,0.04) 0%, transparent 70%)', filter: 'blur(70px)' }}
         />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="p-3 rounded-xl shadow-lg" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
-              <Briefcase size={32} className="text-white" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white drop-shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        {/* Section Header */}
+        <div className="flex flex-col items-center justify-center text-center mb-16">
+          <p style={{ fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(245,158,11,0.55)', marginBottom: '12px' }}>
+            Professional Journey
+          </p>
+          <div className="inline-flex items-center gap-4">
+            <h2
+              className="font-bold drop-shadow-lg"
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+                color: '#f6fafd',
+                lineHeight: 1,
+              }}
+            >
               Internship Experience
             </h2>
           </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            My journey through virtual internships and professional development opportunities.
-          </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
-          {/* Virtual Internships Section */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
-                <Award size={24} className="text-white" />
+        {/* Timeline Container */}
+        <div className="relative w-full max-w-4xl mx-auto">
+
+          {/* Main vertical line */}
+          <div
+            className="absolute left-[1.35rem] md:left-1/2 top-4 bottom-0 w-[2px] rounded-full transform md:-translate-x-1/2"
+            style={{ background: 'linear-gradient(180deg, rgba(245,158,11,0.4) 0%, rgba(245,158,11,0.1) 70%, transparent 100%)' }}
+          />
+
+          {/* Render Timeline Nodes unified array */}
+          <div className="pt-4">
+            {sortedInternships.length > 0 ? (
+              sortedInternships.map((internship, index) => (
+                <TimelineNode
+                  key={index}
+                  internship={internship}
+                  isLeft={index % 2 === 0}
+                />
+              ))
+            ) : (
+              <div className="text-center text-gray-500 py-12">
+                No internships found.
               </div>
-              <h3 className="text-2xl font-bold text-white">Virtual Internships</h3>
-            </div>
-
-            {virtualInternships.map((internship, index) => (
-              <div
-                key={index}
-                className="group glass-effect rounded-2xl p-6 shadow-2xl hover:shadow-lg transition-all duration-500 hover:transform hover:scale-[1.02] relative"
-              >
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="px-2 py-1 rounded-lg shadow-lg group-hover:scale-105 transition-transform duration-300 flex items-center justify-center" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
-                    <span className="text-white font-semibold text-[10px] text-center uppercase tracking-wider leading-tight whitespace-nowrap">
-                      {internship.company.length > 15 ? internship.company.substring(0, 15) + '...' : internship.company}
-                    </span>
-                  </div>
-                  <a
-                    href={internship.certificate}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  >
-                    <div className="flex items-center gap-1 px-2 py-1 rounded-md" style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)' }}>
-                      <span className="text-xs muted font-medium">View</span>
-                      <ExternalLink size={12} style={{ color: 'var(--color-accent)' }} />
-                    </div>
-                  </a>
-                </div>
-
-                {/* Content */}
-                <div className="space-y-3">
-                  <h4 className="text-xl font-bold text-white transition-colors duration-300">
-                    {internship.title}
-                  </h4>
-
-                  <div className="flex items-center gap-2 text-gray-400">
-                    <Building size={16} style={{ color: 'var(--color-accent)' }} />
-                    <span className="text-sm font-medium">{internship.company}</span>
-                  </div>
-
-                  <div className="flex items-center gap-4 text-gray-400 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} />
-                      <span>{internship.duration}</span>
-                    </div>
-
-                  </div>
-
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    {internship.description}
-                  </p>
-
-                  {/* Skills */}
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {internship.skills.map((skill: string) => (
-                      <span
-                          key={skill}
-                          className="px-3 py-1 rounded-full text-xs font-medium"
-                          style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)', color: 'var(--color-accent)' }}
-                        >
-                          {skill}
-                        </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-2xl pointer-events-none" style={{ background: 'linear-gradient(90deg, rgba(74,127,167,0.06), rgba(179,207,229,0.03))' }}></div>
-              </div>
-            ))}
-          </div>
-
-          {/* Offline Internships Section */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 rounded-lg" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' }}>
-                <Building size={24} className="text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-white">Offline Internships</h3>
-            </div>
-
-            {/* No Offline Internships Card */}
-            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 shadow-2xl h-full flex flex-col items-center justify-center text-center space-y-4">
-              <div className="p-4 bg-slate-700/50 rounded-full">
-                <Briefcase size={48} className="text-gray-400" />
-              </div>
-              <h4 className="text-xl font-bold text-white">
-                No Offline Internships Yet
-              </h4>
-              <p className="text-gray-300 leading-relaxed max-w-md">
-                I haven't cracked any formal offline internships yet, but I'm actively seeking opportunities to gain hands-on industry experience and contribute to innovative projects.
-              </p>
-              <div className="pt-4">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm" style={{ background: 'var(--accent-10)', border: '1px solid var(--accent-15)', color: 'var(--color-accent)' }}>
-                  <span>🎯</span>
-                  <span className="font-medium">Open to Opportunities</span>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
-
       </div>
     </section>
   );

@@ -37,4 +37,5 @@ export interface Project {
     gradient: string;
     icon: string;
     iconColor: string;
+    image?: string;
 }
