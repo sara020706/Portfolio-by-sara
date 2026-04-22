@@ -35,7 +35,7 @@ export interface Project {
     github: string;
     live: string;
     gradient: string;
-    icon: string;
-    iconColor: string;
+    icon?: string;
+    iconColor?: string;
     image?: string;
 }

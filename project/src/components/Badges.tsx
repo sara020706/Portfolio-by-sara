@@ -228,7 +228,9 @@ const Badges: React.FC = () => {
   }, []);
 
   return (
-    <section id="badges" className="relative py-16 surface-bg border-t border-accent" style={{ overflow: 'visible' }}>
+    <section id="badges" className="relative py-24 surface-bg" style={{ overflow: 'visible' }}>
+      {/* Golden accent line divider at the top */}
+      <div className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent)' }} />
       {/* Ambient blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div style={{ position: 'absolute', top: '10%', right: '-8%', width: '420px', height: '420px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%)', filter: 'blur(40px)' }} />

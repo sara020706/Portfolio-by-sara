@@ -9,29 +9,39 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSending(true);
+    setErrorMessage('');
 
     try {
       const result = await emailjs.send(
-        "service_r1hy1a7", // your service ID
-        "template_cc3hyux", // your template ID
+        "service_r1hy1a7",
+        "template_670b3em",
         {
-          name: formData.name,
-          email: formData.email,
+          name: formData.name,      // user's original key
+          email: formData.email,     // user's original key
+          from_name: formData.name, // standard emailjs key
+          reply_to: formData.email,  // standard emailjs key
           message: formData.message,
+          to_name: "Parthasarathy",
         },
-        "n-dkkI1WtqLR68Dut" // your public key
+        "n-dkkI1WtqLR68Dut"
       );
 
       if (result.status === 200) {
-        setIsSubmitted(true); // ✅ show success message
-        setFormData({ name: "", email: "", message: "" }); // reset form
-        setTimeout(() => setIsSubmitted(false), 5000); // hide after 5s
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setIsSubmitted(false), 5000);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("FAILED...", error);
+      setErrorMessage(error?.text || 'Something went wrong. Please try again later.');
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -45,7 +55,9 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 relative border-t border-accent surface-bg">
+    <section id="contact" className="py-24 relative surface-bg">
+      {/* Golden accent line divider at the top */}
+      <div className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent)' }} />
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-20 w-80 h-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.12), rgba(251,146,60,0.04))' }}></div>
@@ -54,12 +66,20 @@ const Contact: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 drop-shadow-lg gradient-text" style={{ fontFamily: 'var(--font-display)' }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(245,158,11,0.55)', marginBottom: '10px' }}>
+            Let's Collaborate
+          </p>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+              fontWeight: 400,
+              color: '#f6fafd',
+              lineHeight: 1,
+            }}
+          >
             Get In Touch
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Let's discuss your next project or just say hello. I'm always excited to work on new challenges and meet fellow creators.
-          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -76,7 +96,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="font-medium text-white">Email</p>
-                    <a href="mailto:alex@example.com" className="muted hover:text-light transition-colors">
+                    <a href="mailto:ps2601296@gmail.com" className="muted hover:text-light transition-colors">
                       ps2601296@gmail.com
                     </a>
                   </div>
@@ -120,6 +140,12 @@ const Contact: React.FC = () => {
             <h3 className="text-2xl font-bold text-white mb-6">
               Send Message
             </h3>
+
+            {errorMessage && (
+              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg flex items-center gap-2">
+                <span className="text-red-400 text-sm">❌ {errorMessage}</span>
+              </div>
+            )}
 
             {isSubmitted && (
               <div className="mb-6 p-4" style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.15)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -174,10 +200,14 @@ const Contact: React.FC = () => {
                   placeholder="Tell me about your project..."
                 ></textarea>
               </div>
-              <button type="submit" className="w-full group px-6 py-4 btn-primary font-semibold rounded-lg transform hover:scale-[1.02] transition-all duration-300 shadow-2xl border border-accent">
+              <button
+                type="submit"
+                disabled={isSending}
+                className={`w-full group px-6 py-4 btn-primary font-semibold rounded-lg transform hover:scale-[1.02] transition-all duration-300 shadow-2xl border border-accent ${isSending ? 'opacity-70 cursor-not-allowed' : ''}`}
+              >
                 <span className="flex items-center justify-center gap-2">
-                  Send Message
-                  <Send size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  {isSending ? 'Sending...' : 'Send Message'}
+                  {!isSending && <Send size={20} className="group-hover:translate-x-1 transition-transform duration-300" />}
                 </span>
               </button>
             </form>

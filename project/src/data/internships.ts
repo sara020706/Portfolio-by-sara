@@ -26,6 +26,6 @@ export const defaultInternships: Internship[] = [
         description: 'Contributed to live projects at L2M Labs, applying development skills to solve real-world problems. Gained hands-on experience in building, optimizing, and delivering scalable solutions.',
         skills: ['React', 'Node.js', 'Express', 'postgresql', 'REST APIs', 'Git', 'Agile'],
         certificate: '#',
-        type: 'onsite',
+        type: 'offline',
     },
 ];

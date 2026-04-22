@@ -48,7 +48,10 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex gap-4 mt-32 justify-center animate-fade-rise-delay-3">
-            <button className="liquid-glass rounded-full px-10 py-4 text-base text-foreground hover:scale-[1.03] transition-transform">
+            <button
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="liquid-glass rounded-full px-10 py-4 text-base text-foreground hover:scale-[1.03] transition-transform"
+            >
               <span className="flex items-center gap-2"><Mail size={18} /> Get In Touch</span>
             </button>
 

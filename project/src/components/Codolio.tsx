@@ -1,9 +1,11 @@
 import React from 'react';
-import { Code, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 const Codolio: React.FC = () => {
   return (
-    <section id="codolio" className="py-20 relative border-t border-accent surface-bg">
+    <section id="codolio" className="py-24 relative surface-bg">
+      {/* Golden accent line divider at the top */}
+      <div className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent)' }} />
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 right-20 w-72 h-72 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, rgba(179,207,229,0.12), rgba(74,127,167,0.04))' }}></div>
@@ -12,15 +14,20 @@ const Codolio: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="p-3 rounded-xl shadow-lg" style={{ background: 'linear-gradient(90deg,var(--color-primary),var(--color-accent))' }}>
-              <Code size={32} className="text-light" />
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-bold text-light drop-shadow-lg">Codolio Profile</h2>
-          </div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Check out my coding journey, projects, and achievements on Codolio.
+          <p style={{ fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(245,158,11,0.55)', marginBottom: '10px' }}>
+            Coding Profile
           </p>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+              fontWeight: 400,
+              color: '#f6fafd',
+              lineHeight: 1,
+            }}
+          >
+            Codolio Profile
+          </h2>
         </div>
 
         {/* Embedded Codolio Profile */}

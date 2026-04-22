@@ -11,11 +11,11 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Internships', href: '#internships' },
     { name: 'Certifications', href: '#certifications' },
     { name: 'Badges', href: '#badges' },
-    { name: 'Internships', href: '#internships' },
     { name: 'Codolio', href: '#codolio' },
-    { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' },
     { name: 'Resume', href: 'https://drive.google.com/file/d/1Gaql01VDTz_ycqmLbcjINc4DFpKKbuHP/view?usp=sharing', external: true },
   ];

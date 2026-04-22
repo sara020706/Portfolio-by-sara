@@ -1,249 +1,252 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ExternalLink, Github, ChevronLeft, ChevronRight, Folder, Globe, Code2, Smartphone, Timer, Heart, Zap, Palette } from 'lucide-react';
-import { gsap } from 'gsap';
+import { Github, ChevronLeft, ChevronRight, Globe, ExternalLink } from 'lucide-react';
 
 import { defaultProjects } from '../data/projects';
-import { Project } from '../data/types';
-
-const iconMap: Record<string, React.ComponentType<any>> = {
-  Code2,
-  Smartphone,
-  Timer,
-  Heart,
-  Folder,
-  Zap,
-  Palette,
-};
+import { getDirectImageLink } from '../utils/imageUtils';
 
 const Projects: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const spotlightRef = useRef<HTMLDivElement>(null);
-  const queueRef = useRef<HTMLDivElement>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-
+  const timerRef = useRef<any>(null);
   const projects = defaultProjects;
-  const activeProject = projects[activeIndex];
 
-  const handleNext = useCallback(() => {
+  const startTimer = useCallback(() => {
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % projects.length);
+    }, 5000);
+  }, [projects.length]);
+
+  useEffect(() => {
+    startTimer();
+    return () => clearInterval(timerRef.current);
+  }, [startTimer]);
+
+  const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % projects.length);
-  }, [projects.length]);
-
-  const handlePrev = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
-  }, [projects.length]);
-
-  const goToProject = (index: number) => {
-    setActiveIndex(index);
-    setIsAutoPlaying(false);
+    startTimer();
   };
 
-  useEffect(() => {
-    if (isAutoPlaying) {
-      timerRef.current = setInterval(handleNext, 5000);
-    }
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [isAutoPlaying, handleNext]);
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
+    startTimer();
+  };
 
-  useEffect(() => {
-    if (spotlightRef.current) {
-      gsap.fromTo(
-        spotlightRef.current.children,
-        { opacity: 0, x: 20 },
-        { opacity: 1, x: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' }
-      );
+  const handleSelect = (projectIndex: number) => {
+    setActiveIndex(projectIndex);
+    startTimer();
+  };
+
+  // Helper to get slot layout based on window width
+  const getSlotLayout = (slotIndex: number) => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
+    // Normalizing slot index: 0 is Spotlight, 1 is Med, 2 is Comp1, 3 is Comp2
+    // Anything < 0 is "Exiting", anything > 3 is "Queued"
+
+    if (isMobile) {
+      if (slotIndex < 0) return { top: '-10%', left: '0', width: '100%', height: '0%', opacity: 0, zIndex: 0 };
+      if (slotIndex === 0) return { top: '0', left: '0', width: '100%', height: '58%', opacity: 1, zIndex: 50 };
+      if (slotIndex === 1) return { top: '61%', left: '0', width: '100%', height: '12%', opacity: 1, zIndex: 40 };
+      if (slotIndex === 2) return { top: '75%', left: '0', width: '100%', height: '11%', opacity: 1, zIndex: 30 };
+      if (slotIndex === 3) return { top: '88%', left: '0', width: '100%', height: '10%', opacity: 1, zIndex: 20 };
+      return { top: '100%', left: '0', width: '100%', height: '0%', opacity: 0, zIndex: 10 };
     }
-  }, [activeIndex]);
+
+    // Desktop Bento
+    // ┌─────────────────────────┬─────────────────┐
+    // │                         │  Slot 1 (Med)   │
+    // │   Slot 0 (Spotlight)    │  w: 38% h: 48%  │
+    // │   w: 60% h: 100%        ├────────┬────────┤
+    // │                         │ Slot 2 │ Slot 3 │
+    // └─────────────────────────┴────────┴────────┘
+
+    if (slotIndex < 0) return { top: '0', left: '-20%', width: '0%', height: '100%', opacity: 0, zIndex: 0 };
+    if (slotIndex === 0) return { top: '0', left: '0', width: '60%', height: '100%', opacity: 1, zIndex: 50 };
+    if (slotIndex === 1) return { top: '0', left: '62%', width: '38%', height: '48%', opacity: 1, zIndex: 40 };
+    if (slotIndex === 2) return { top: '52%', left: '62%', width: '18%', height: '48%', opacity: 1, zIndex: 30 };
+    if (slotIndex === 3) return { top: '52%', left: '82%', width: '18%', height: '48%', opacity: 1, zIndex: 20 };
+    return { top: '52%', left: '100%', width: '0%', height: '48%', opacity: 0, zIndex: 10 };
+  };
 
   return (
     <section
       id="projects"
-      className="py-24 relative overflow-hidden surface-bg border-t border-accent/20"
-      onMouseEnter={() => setIsAutoPlaying(false)}
-      onMouseLeave={() => setIsAutoPlaying(true)}
+      className="py-24 relative overflow-hidden surface-bg"
+      onMouseEnter={() => { setIsAutoPlaying(false); clearInterval(timerRef.current); }}
+      onMouseLeave={() => { setIsAutoPlaying(true); startTimer(); }}
     >
-      {/* Background Ambience */}
+      {/* Golden accent line divider at the top */}
+      <div className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent)' }} />
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-accent/4 blur-[120px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-
-          {/* Left Side: Spotlight Card */}
-          <div className="w-full lg:w-3/5">
-            <div className="mb-8">
-              <h2 className="text-4xl sm:text-5xl font-bold mb-4 gradient-text inline-block">
-                Projects
-              </h2>
-              <p className="text-gray-400 text-lg max-w-xl leading-relaxed">
-                A showcase of my recent work, blending design aesthetics with robust engineering.
-              </p>
-            </div>
-
-            <div
-              ref={spotlightRef}
-              className="relative aspect-[16/10] sm:aspect-[16/9] rounded-3xl overflow-hidden glass-effect border border-white/10 shadow-2xl group"
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-6">
+          <div>
+            <p style={{ fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(245,158,11,0.55)', marginBottom: '10px' }}>
+              Engineering & Design
+            </p>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+                fontWeight: 400,
+                color: '#f6fafd',
+                lineHeight: 1,
+              }}
             >
-              {/* Project Image */}
-              <div className="absolute inset-0">
-                <img
-                  src={activeProject.image}
-                  alt={activeProject.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              Projects
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <button onClick={handlePrev} className="p-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-primary hover:border-primary transition-all active:scale-90">
+              <ChevronLeft size={20} />
+            </button>
+            <div className="flex gap-2 items-center">
+              {projects.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => handleSelect(i)}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${i === activeIndex
+                    ? 'w-8 bg-primary shadow-[0_0_8px_rgba(245,158,11,0.5)]'
+                    : 'w-1.5 bg-white/20 hover:bg-white/40'
+                    }`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-              </div>
+              ))}
+            </div>
+            <button onClick={handleNext} className="p-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-primary hover:border-primary transition-all active:scale-90">
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
 
-              {/* Content Overlay */}
-              <div className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-end">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="px-3 py-1 bg-primary/20 backdrop-blur-md border border-primary/30 rounded-full text-xs font-semibold text-primary uppercase tracking-wider">
-                      Featured Work
-                    </span>
+        {/* Bento Conveyor Container */}
+        <div className="relative w-full h-[700px] lg:h-[550px]">
+          {projects.map((project, index) => {
+            // Calculate slot index based on activeIndex
+            // 0 = spotlight, 1 = med, 2 = comp1, 3 = comp2
+            // We want it to cycle.
+            let slotIndex = (index - activeIndex + projects.length) % projects.length;
+
+            // If it just exited (was spotlight at last index), make it -1 for exit animation
+            // This is tricky with simple math. Let's just use the current slot.
+            const layout = getSlotLayout(slotIndex);
+            const isSpotlight = slotIndex === 0;
+            const isMedium = slotIndex === 1;
+            const isCompact = slotIndex === 2 || slotIndex === 3;
+            const isHidden = slotIndex > 3 || slotIndex < 0;
+
+            return (
+              <div
+                key={index}
+                onClick={() => handleSelect(index)}
+                className={`absolute transition-all duration-700 ease-in-out rounded-3xl overflow-hidden cursor-pointer border flex flex-col group
+                  ${isSpotlight ? 'border-primary/30 shadow-[0_0_50px_rgba(245,158,11,0.07)]' : 'border-white/5 hover:border-primary/20'}
+                  ${isHidden ? 'pointer-events-none' : ''}
+                `}
+                style={{
+                  top: layout.top,
+                  left: layout.left,
+                  width: layout.width,
+                  height: layout.height,
+                  opacity: layout.opacity,
+                  zIndex: layout.zIndex,
+                }}
+              >
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img
+                    src={getDirectImageLink(project.image)}
+                    alt={project.title}
+                    referrerPolicy="no-referrer"
+                    className={`w-full h-full object-cover transition-all duration-700
+                      ${isSpotlight ? 'group-hover:scale-105 opacity-100' : 'opacity-40 group-hover:opacity-60'}
+                      ${isCompact ? 'opacity-20' : ''}
+                    `}
+                  />
+                  <div className={`absolute inset-0 transition-opacity duration-700
+                    ${isSpotlight ? 'bg-gradient-to-t from-black/95 via-black/55 to-black/10' : 'bg-black/70'}
+                    ${isMedium ? 'bg-gradient-to-t from-black/80 to-transparent' : ''}
+                    ${isCompact ? 'bg-gradient-to-t from-black/90 to-black/50' : ''}
+                  `} />
+                </div>
+
+                {/* Spotlight Content (Shows only when slotIndex === 0) */}
+                <div className={`absolute inset-0 p-8 sm:p-10 flex flex-col justify-end transition-opacity duration-500 delay-200
+                  ${isSpotlight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                  <div className="mb-4">
+                    <span className="text-xs font-bold text-primary uppercase tracking-widest">Spotlight</span>
                   </div>
-                  <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-                    {activeProject.title}
-                  </h3>
-                  <p className="text-gray-300 text-lg max-w-2xl line-clamp-2 sm:line-clamp-none">
-                    {activeProject.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {activeProject.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs sm:text-sm text-gray-400 font-medium px-3 py-1 rounded-lg bg-white/5 border border-white/10"
-                      >
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <span key={tag} className="text-[10px] font-semibold text-primary/80 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20">
                         {tag}
                       </span>
                     ))}
                   </div>
-
-                  <div className="flex items-center gap-4 pt-6">
-                    <a
-                      href={activeProject.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary px-6 py-3 rounded-xl flex items-center gap-2 font-semibold transition-all hover:gap-3"
-                    >
-                      View Live <Globe size={18} />
+                  <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 leading-tight tracking-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-md line-clamp-3">
+                    {project.description}
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <a href={project.live} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="btn-primary px-6 py-3 rounded-xl flex items-center gap-2 font-bold text-xs hover:gap-3 transition-all active:scale-95">
+                      View Live <ExternalLink size={14} />
                     </a>
-                    <a
-                      href={activeProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
-                    >
-                      <Github size={22} />
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="p-3 rounded-xl bg-white/10 border border-white/10 text-white hover:bg-white/20 transition-all">
+                      <Github size={16} />
                     </a>
                   </div>
                 </div>
+
+                {/* Medium Card Content */}
+                <div className={`absolute inset-0 p-6 flex flex-col justify-between transition-opacity duration-500
+                  ${isMedium ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                  <div className="mb-4">
+                    <span className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{project.tags[0]}</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold text-white mb-1.5">{project.title}</h4>
+                    <p className="text-gray-400 text-[11px] line-clamp-2 leading-relaxed">{project.description}</p>
+                  </div>
+                </div>
+
+                {/* Compact Card Content */}
+                <div className={`absolute inset-0 p-4 flex flex-col justify-between transition-opacity duration-500
+                  ${isCompact ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                  <div className="mb-2">
+                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider">{project.tags[0]}</span>
+                  </div>
+                  <div>
+                    <h5 className="text-xs font-bold text-white tracking-tight truncate">{project.title}</h5>
+                  </div>
+                </div>
+
+                {/* Plus N More Badge (Only for the last COMPACT slot if there are more) */}
+                {slotIndex === 3 && projects.length > 4 && (
+                  <div className="absolute inset-0 bg-primary/10 backdrop-blur-sm flex flex-col items-center justify-center gap-1 group-hover:bg-primary/20 transition-all">
+                    <span className="text-2xl font-black text-primary">+{projects.length - 4}</span>
+                    <span className="text-[9px] text-primary/60 font-bold uppercase tracking-widest">Queue</span>
+                  </div>
+                )}
               </div>
+            );
+          })}
+        </div>
 
-              {/* Navigation Arrows */}
-              <div className="absolute top-1/2 -translate-y-1/2 left-4 right-4 flex justify-between pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <button
-                  onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                  className="p-3 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white pointer-events-auto hover:bg-primary transition-colors shadow-lg"
-                >
-                  <ChevronLeft size={24} />
-                </button>
-                <button
-                  onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                  className="p-3 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-white pointer-events-auto hover:bg-primary transition-colors shadow-lg"
-                >
-                  <ChevronRight size={24} />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Side: Project Queue */}
-          <div className="w-full lg:w-2/5 flex flex-col gap-4">
-            <div className="flex items-center justify-between px-2">
-              <span className="text-sm font-semibold text-gray-500 uppercase tracking-widest">Upcoming Projects</span>
-              <div className="flex gap-1">
-                {projects.map((_, i) => (
-                  <div
-                    key={i}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${i === activeIndex ? 'w-8 bg-primary' : 'w-2 bg-gray-700'}`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div ref={queueRef} className="grid grid-cols-1 gap-4">
-              {projects.map((project, index) => {
-                const isActive = index === activeIndex;
-                const IconComponent = iconMap[project.icon] || Folder;
-
-                return (
-                  <button
-                    key={index}
-                    onClick={() => goToProject(index)}
-                    className={`group relative text-left p-4 rounded-2xl border transition-all duration-500 overflow-hidden ${isActive
-                      ? 'bg-primary/10 border-primary/40 shadow-[0_0_20px_rgba(245,158,11,0.1)]'
-                      : 'bg-white/5 border-white/5 hover:border-white/20'
-                      }`}
-                  >
-                    {isActive && (
-                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
-                    )}
-
-                    <div className="flex items-center gap-4 relative z-10">
-                      <div className={`p-3 rounded-xl transition-colors duration-300 ${isActive ? 'bg-primary text-white' : 'bg-white/5 text-gray-400 group-hover:text-white'
-                        }`}>
-                        <IconComponent size={20} />
-                      </div>
-
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between">
-                          <h4 className={`font-bold transition-colors duration-300 ${isActive ? 'text-primary' : 'text-gray-300 group-hover:text-white'
-                            }`}>
-                            {project.title}
-                          </h4>
-                          {isActive && <Zap size={14} className="text-primary animate-pulse" />}
-                        </div>
-                        <p className="text-gray-500 text-sm truncate mt-0.5">
-                          {project.tags.slice(0, 2).join(' • ')}
-                        </p>
-                      </div>
-
-                      {!isActive && (
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                          <ChevronRight size={18} className="text-primary" />
-                        </div>
-                      )}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="mt-4 p-6 rounded-3xl bg-gradient-to-br from-primary/20 via-transparent to-accent/5 border border-primary/20 relative overflow-hidden group">
-              <div className="relative z-10">
-                <h4 className="text-lg font-bold text-white mb-2">Explore More</h4>
-                <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-                  Check out my complete portfolio of open-source projects on GitHub.
-                </p>
-                <a
-                  href="https://github.com/sara020706"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"
-                >
-                  Open GitHub <ExternalLink size={16} />
-                </a>
-              </div>
-              <Github className="absolute -bottom-4 -right-4 w-24 h-24 text-white/5 rotate-12 transition-transform group-hover:scale-110 group-hover:-rotate-6" />
-            </div>
-          </div>
-
+        {/* Status Bar */}
+        <div className="mt-12 flex items-center justify-center gap-3 opacity-40">
+          <div className={`h-[1px] rounded-full transition-all duration-700 ${isAutoPlaying ? 'w-12 bg-primary' : 'w-4 bg-gray-600'}`} />
+          <span className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold">
+            {isAutoPlaying ? 'Stream Active' : 'Paused'}
+          </span>
+          <div className={`h-[1px] rounded-full transition-all duration-700 ${isAutoPlaying ? 'w-12 bg-primary' : 'w-4 bg-gray-600'}`} />
         </div>
       </div>
     </section>

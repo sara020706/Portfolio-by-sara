@@ -22,7 +22,7 @@ function App() {
     document.documentElement.classList.add('dark');
 
     const handleScroll = () => {
-      const sections = ['home', 'about', 'certifications', 'badges', 'internships', 'codolio', 'projects', 'contact'];
+      const sections = ['home', 'about', 'projects', 'internships', 'certifications', 'badges', 'codolio', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       sections.forEach(section => {
@@ -78,11 +78,11 @@ function App() {
         <Navigation activeSection={activeSection} />
         <Hero />
         <About />
+        <Projects />
+        <Internships />
         <Certifications />
         <Badges />
-        <Internships />
         <Codolio />
-        <Projects />
         <Contact />
         <Footer />
 

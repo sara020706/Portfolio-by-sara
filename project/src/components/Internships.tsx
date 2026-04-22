@@ -154,7 +154,7 @@ const Internships: React.FC = () => {
   }, []);
 
   return (
-    <section id="internships" className="py-20 relative" style={{ background: 'var(--color-surface)', overflow: 'hidden' }}>
+    <section id="internships" className="py-24 relative surface-bg" style={{ overflow: 'hidden' }}>
 
       {/* Golden accent line divider at the top */}
       <div className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent)' }} />
@@ -180,10 +180,10 @@ const Internships: React.FC = () => {
           </p>
           <div className="inline-flex items-center gap-4">
             <h2
-              className="font-bold drop-shadow-lg"
               style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+                fontWeight: 400,
                 color: '#f6fafd',
                 lineHeight: 1,
               }}

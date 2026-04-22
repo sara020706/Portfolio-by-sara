@@ -24,7 +24,9 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-20 relative surface-bg border-t border-accent">
+    <section id="about" className="py-24 relative surface-bg">
+      {/* Golden accent line divider at the top */}
+      <div className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent)' }} />
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div
@@ -39,11 +41,23 @@ const About: React.FC = () => {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 drop-shadow-lg gradient-text" style={{ fontFamily: 'var(--font-display)' }}>
+          <p style={{ fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(245,158,11,0.55)', marginBottom: '10px' }}>
+            Who I Am
+          </p>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
+              fontWeight: 400,
+              color: '#f6fafd',
+              lineHeight: 1,
+            }}
+          >
             About Me
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Beyond development, I’m someone who thrives on learning and exploring new technologies. I’m currently diving into AI, cloud computing, and problem-solving through projects that push me to think differently. My goal is to blend creativity with technical depth to build solutions that truly make an impact.          </p>
+          <p className="mt-8 text-gray-300 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed opacity-80">
+            Beyond development, I’m someone who thrives on learning and exploring new technologies. I’m currently diving into AI, cloud computing, and problem-solving through projects that push me to think differently. My goal is to blend creativity with technical depth to build solutions that truly make an impact.
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center">

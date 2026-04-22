@@ -10,7 +10,7 @@ export const defaultProjects: Project[] = [
         gradient: '',
         icon: 'Code2',
         iconColor: 'text-light',
-        image: 'https://images.unsplash.com/photo-1554224155-6726b3fb858f?q=80&w=2022&auto=format&fit=crop'
+        image: 'https://drive.google.com/file/d/1Zsf7zR10JgfoVgEdHAD_sdPCZIbv8Yeb/view?usp=sharing'
     },
     {
         title: 'Day-Wise',
@@ -21,7 +21,7 @@ export const defaultProjects: Project[] = [
         gradient: '',
         icon: 'Smartphone',
         iconColor: 'text-light',
-        image: 'https://images.unsplash.com/photo-1506784365847-bbad939e9335?q=80&w=2068&auto=format&fit=crop'
+        image: 'https://drive.google.com/file/d/1NLc5KcLFhUZXE4jujo4hx7bDaXHri8f_/view?usp=sharing'
     },
     {
         title: 'Focus Sense',
@@ -32,7 +32,7 @@ export const defaultProjects: Project[] = [
         gradient: '',
         icon: 'Timer',
         iconColor: 'text-light',
-        image: 'https://images.unsplash.com/photo-1495364141860-b0d0397a0273?q=80&w=2070&auto=format&fit=crop'
+        image: 'https://drive.google.com/file/d/1h1tJYLdXPo7e33Rlvj88EkXKYvOjSwjw/view?usp=sharing'
     },
     {
         title: 'Flames-By--Sara',
@@ -44,5 +44,25 @@ export const defaultProjects: Project[] = [
         icon: 'Heart',
         iconColor: 'text-light',
         image: 'https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?q=80&w=2070&auto=format&fit=crop'
+    },
+    {
+        title: 'IBCIB',
+        description: 'Image based classification of indegenous breeds   ',
+        tags: ['React 18 (with Vite) ⚡', 'TailwindCSS 🎨', 'Lucide React (for icons) 🔥', 'python 3.12', 'Rest api`s', 'deep learning', 'machine learning', 'vercel', 'render'],
+        github: 'https://github.com/sara020706/IBCIB',
+        live: 'https://ibcib.vercel.app/',
+        gradient: '',
+        image: 'https://lh3.googleusercontent.com/d/1E1xaruPuKF_-nPrC7yXyqDHYD2bBE4f9'
+    },
+    {
+        title: 'decdir',
+        description: 'The decidr is coin toss based decision maker where you are stuck in between choices ',
+        tags: ['React 18 (with Vite) ⚡', 'TailwindCSS 🎨', 'Lucide React (for icons) 🔥'],
+        github: 'https://github.com/sara020706/the-decision-maker-',
+        live: 'https://the-decision-maker.vercel.app/',
+        gradient: '',
+        icon: 'Heart',
+        iconColor: 'text-light',
+        image: 'https://drive.google.com/file/d/1bqhDnoZ_gWc4wAHzxYKMceKeERdVj3YN/view?usp=sharing'
     }
 ];
