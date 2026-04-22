@@ -65,7 +65,7 @@ const About: React.FC = () => {
           <div className="relative">
             <div className="relative z-10">
               <img
-                src="/img1.jpg"
+                src="/images/profile.jpg"
                 alt="Parthasarathy"
                 className="w-full max-w-md mx-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
                 style={{ border: '2px solid rgba(245,158,11,0.18)' }}
