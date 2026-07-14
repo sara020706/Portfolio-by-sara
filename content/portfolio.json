@@ -1,0 +1,231 @@
+{
+  "projects": [
+    {
+      "id": "project-1",
+      "title": "AmortizePro",
+      "subtitle": "Loan Amortization Calculator.",
+      "description": "Loan Amortization Calculator.",
+      "technologies": ["Django 5.2", "HTML", "TailwindCSS", "Python 3.13"],
+      "githubUrl": "https://github.com/sara020706/amortization-table",
+      "liveUrl": "https://amortization-table.onrender.com/",
+      "image": "https://drive.google.com/file/d/1Zsf7zR10JgfoVgEdHAD_sdPCZIbv8Yeb/view?usp=sharing",
+      "featured": false,
+      "category": "web",
+      "status": "completed",
+      "startDate": "",
+      "endDate": "",
+      "tags": ["Django 5.2", "HTML", "TailwindCSS", "Python 3.13"],
+      "highlights": [],
+      "order": 1
+    },
+    {
+      "id": "project-2",
+      "title": "Day-Wise",
+      "subtitle": "AI-Powered Task Scheduling Mobile App.",
+      "description": "AI-Powered Task Scheduling Mobile App.",
+      "technologies": ["React", "TypeScript", "Capacitor", "Tailwind CSS"],
+      "githubUrl": "https://github.com/sara020706/Day-Wise",
+      "liveUrl": "https://github.com/sara020706/Day-Wise",
+      "image": "https://drive.google.com/file/d/1NLc5KcLFhUZXE4jujo4hx7bDaXHri8f_/view?usp=sharing",
+      "featured": false,
+      "category": "mobile",
+      "status": "completed",
+      "startDate": "",
+      "endDate": "",
+      "tags": ["React", "TypeScript", "Capacitor", "Tailwind CSS"],
+      "highlights": [],
+      "order": 2
+    },
+    {
+      "id": "project-3",
+      "title": "Focus Sense",
+      "subtitle": "A beautiful, minimalist Pomodoro timer app.",
+      "description": "A beautiful, minimalist Pomodoro timer app built with React, Vite, and Capacitor for web and Android platforms.",
+      "technologies": ["React 18", "TypeScript", "Vite", "Tailwind CSS", "Capacitor"],
+      "githubUrl": "https://github.com/sara020706/focus-sense",
+      "liveUrl": "https://github.com/sara020706/focus-sense",
+      "image": "https://drive.google.com/file/d/1h1tJYLdXPo7e33Rlvj88EkXKYvOjSwjw/view?usp=sharing",
+      "featured": false,
+      "category": "web",
+      "status": "completed",
+      "startDate": "",
+      "endDate": "",
+      "tags": ["React 18", "TypeScript", "Vite", "Tailwind CSS"],
+      "highlights": [],
+      "order": 3
+    },
+    {
+      "id": "project-4",
+      "title": "Flames-By--Sara",
+      "subtitle": "A fun FLAMES game built with React.",
+      "description": "A fun FLAMES game built with React, Vite, TailwindCSS, and Lucide icons.",
+      "technologies": ["React 18", "TailwindCSS", "Lucide React"],
+      "githubUrl": "https://github.com/sara020706/Flames-By--Sara",
+      "liveUrl": "https://flames-by-sara.vercel.app/",
+      "image": "https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?q=80&w=2070&auto=format&fit=crop",
+      "featured": false,
+      "category": "web",
+      "status": "completed",
+      "startDate": "",
+      "endDate": "",
+      "tags": ["React 18", "TailwindCSS"],
+      "highlights": [],
+      "order": 4
+    },
+    {
+      "id": "project-5",
+      "title": "IBCIB",
+      "subtitle": "Image based classification of indegenous breeds",
+      "description": "Image based classification of indegenous breeds",
+      "technologies": ["React 18", "TailwindCSS", "python 3.12"],
+      "githubUrl": "https://github.com/sara020706/IBCIB",
+      "liveUrl": "https://ibcib.vercel.app/",
+      "image": "https://lh3.googleusercontent.com/d/1E1xaruPuKF_-nPrC7yXyqDHYD2bBE4f9",
+      "featured": false,
+      "category": "ai",
+      "status": "completed",
+      "startDate": "",
+      "endDate": "",
+      "tags": ["React 18", "TailwindCSS", "python 3.12"],
+      "highlights": [],
+      "order": 5
+    },
+    {
+      "id": "project-6",
+      "title": "Decidr",
+      "subtitle": "The decidr is coin toss based decision maker",
+      "description": "The decidr is coin toss based decision maker where you are stuck in between choices",
+      "technologies": ["React 18", "TailwindCSS"],
+      "githubUrl": "https://github.com/sara020706/the-decision-maker-",
+      "liveUrl": "https://the-decision-maker.vercel.app/",
+      "image": "https://drive.google.com/file/d/1bqhDnoZ_gWc4wAHzxYKMceKeERdVj3YN/view?usp=sharing",
+      "featured": false,
+      "category": "web",
+      "status": "completed",
+      "startDate": "",
+      "endDate": "",
+      "tags": ["React 18", "TailwindCSS"],
+      "highlights": [],
+      "order": 6
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert-1",
+      "title": "Beginner: Google Cloud Data Analytics",
+      "issuer": "Google",
+      "issueDate": "2025-01-01",
+      "expiryDate": "",
+      "credentialUrl": "https://www.credly.com/badges/2724893a-3e9b-4f86-9e63-0eb571c884d7",
+      "credentialId": "",
+      "image": "https://drive.google.com/file/d/116lKGOQtmzyBZRf_zyAykcjgx9Qxdc1R/view?usp=drive_link",
+      "skills": ["Data Analytics", "Google Cloud"]
+    },
+    {
+      "id": "cert-2",
+      "title": "Career Essentials in Cybersecurity",
+      "issuer": "Microsoft",
+      "issueDate": "2025-01-01",
+      "expiryDate": "",
+      "credentialUrl": "https://www.linkedin.com/learning/certificates/2906edea526205ae1f250bbbba2750ddfd33390feb50f40fcb40aff58419ecfb",
+      "credentialId": "",
+      "image": "https://drive.google.com/file/d/1BpV0Jt_CFxXTzmo-uyqJwx2n_kGk-Uty/view?usp=drive_link",
+      "skills": ["Cybersecurity"]
+    },
+    {
+      "id": "cert-3",
+      "title": "Introduction to Modern AI",
+      "issuer": "Cisco Networking Academy",
+      "issueDate": "2025-01-01",
+      "expiryDate": "",
+      "credentialUrl": "https://www.credly.com/badges/d176ad0d-8191-44f8-9fa5-c67c4229eada",
+      "credentialId": "",
+      "image": "https://drive.google.com/file/d/1C15ap7DF7GhTcNy0_F4rm-lpBP_aj9QZ/view?usp=drive_link",
+      "skills": ["AI"]
+    },
+    {
+      "id": "cert-4",
+      "title": "Introduction to Data Science",
+      "issuer": "Cisco Networking Academy",
+      "issueDate": "2025-01-01",
+      "expiryDate": "",
+      "credentialUrl": "https://www.credly.com/badges/c428971b-d593-49cb-98d3-d96006ad5eb9",
+      "credentialId": "",
+      "image": "https://drive.google.com/file/d/1nYmKn1Olc_euwrligracukCz7TMBduUO/view?usp=drive_link",
+      "skills": ["Data Science"]
+    },
+    {
+      "id": "cert-5",
+      "title": "Introduction to IoT and Digital Transformation",
+      "issuer": "Cisco Networking Academy",
+      "issueDate": "2025-01-01",
+      "expiryDate": "",
+      "credentialUrl": "https://www.credly.com/badges/fae0c18f-50e2-4f18-8e68-7ce140434815",
+      "credentialId": "",
+      "image": "https://drive.google.com/file/d/17vqKkJqe0rHKC0lnVLZGoPE06uNDUATm/view?usp=drive_link",
+      "skills": ["IoT"]
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-1",
+      "company": "Amazon (through Eduskills Foundation)",
+      "role": "IoT Cloud Engineer Virtual Internship",
+      "duration": "Jul 2025 - Sep 2025",
+      "location": "Virtual",
+      "description": "During my AWS IoT Cloud Engineer Internship at Eduskills, I gained hands-on experience in AWS IoT Core, MQTT protocol, device connectivity and management.",
+      "technologies": ["AWS IoT Core", "MQTT", "Lambda", "Python"]
+    },
+    {
+      "id": "exp-2",
+      "company": "Altair(through Eduskills Foundation)",
+      "role": "Altair Data Science Master virtual internship",
+      "duration": "Oct 2025 - Dec 2025",
+      "location": "Virtual",
+      "description": "Gained hands-on experience in Python, data analysis, visualization using Altair, and basic machine learning techniques.",
+      "technologies": ["altair studio", "Data analysis", "Data visualization", "Machine learning", "python"]
+    },
+    {
+      "id": "exp-3",
+      "company": "L2M Labs",
+      "role": "Project Intern(full stack developer)",
+      "duration": "Jan 2026 - present",
+      "location": "Offline",
+      "description": "Contributed to live projects at L2M Labs, applying development skills to solve real-world problems.",
+      "technologies": ["React", "Node.js", "Express", "postgresql", "REST APIs", "Git", "Agile"]
+    }
+  ],
+  "skills": [
+    {
+      "id": "skill-1",
+      "category": "Frontend",
+      "name": "React",
+      "icon": "react",
+      "level": "Advanced"
+    },
+    {
+      "id": "skill-2",
+      "category": "Frontend",
+      "name": "Tailwind CSS",
+      "icon": "tailwind",
+      "level": "Advanced"
+    },
+    {
+      "id": "skill-3",
+      "category": "Backend",
+      "name": "Python",
+      "icon": "python",
+      "level": "Intermediate"
+    }
+  ],
+  "badges": [
+    {
+      "id": "badge-1",
+      "title": "Applications & Use Cases Professional",
+      "issuer": "Altair Engineering Inc.",
+      "date": "2025-11-12",
+      "description": "Applications & Use Cases Professional is the first certification level.",
+      "verificationUrl": "https://openbadgepassport.com/app/badge/info/1042400"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -9,10 +10,9 @@ import Codolio from './components/Codolio';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import AdminDashboard from './admin/pages/AdminDashboard';
 
-// Admin panel removed — development-only panel was deleted per request
-
-function App() {
+function PublicWebsite() {
   const [activeSection, setActiveSection] = useState('home');
   // no dev-only UI shown; leave import.meta.env.DEV available if needed in future
   void import.meta.env.DEV;
@@ -89,6 +89,15 @@ function App() {
         {/* admin panel removed */}
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<PublicWebsite />} />
+      <Route path="/admin/*" element={<AdminDashboard />} />
+    </Routes>
   );
 }
 

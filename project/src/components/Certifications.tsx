@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react';
-import { FileText, ExternalLink, CheckCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { FileText, ExternalLink, CheckCircle, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 
-import { defaultCertifications } from '../data/certifications';
+import { usePortfolioData } from '../hooks/usePortfolioData';
 import { Certification } from '../data/types';
 
 /* ─── Brand theme map ─────────────────────────────────────────────────── */
@@ -294,7 +294,8 @@ const ArrowBtn: React.FC<{ dir: 'left' | 'right'; onClick: () => void }> = ({ di
 
 /* ─── Main Section ────────────────────────────────────────────────────── */
 const Certifications: React.FC = () => {
-  const certifications = defaultCertifications;
+  const { data, isLoading, isError } = usePortfolioData();
+  const certifications = data?.certificates || [];
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = useCallback((dir: 'left' | 'right') => {
@@ -311,6 +312,17 @@ const Certifications: React.FC = () => {
         <div style={{ position: 'absolute', top: '10%', left: '-8%', width: '420px', height: '420px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%)', filter: 'blur(40px)' }} />
         <div style={{ position: 'absolute', bottom: '5%', right: '-5%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(251,146,60,0.07) 0%, transparent 70%)', filter: 'blur(50px)' }} />
       </div>
+
+      {isLoading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+          <Loader2 className="w-10 h-10 text-primary animate-spin" />
+        </div>
+      )}
+      {isError && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+          <p className="text-red-500 font-bold">Failed to load certifications.</p>
+        </div>
+      )}
 
       <div className="relative z-10 max-w-screen-xl mx-auto px-6 sm:px-8 lg:px-10">
         {/* Header */}

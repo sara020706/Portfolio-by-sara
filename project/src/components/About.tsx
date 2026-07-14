@@ -1,5 +1,6 @@
 import React from 'react';
-import { Code, Palette, Zap, Heart } from 'lucide-react';
+import { Code, Palette, Zap, Heart, Loader2 } from 'lucide-react';
+import { usePortfolioData } from '../hooks/usePortfolioData';
 // image imported via static path in markup
 
 const About: React.FC = () => {
@@ -10,17 +11,14 @@ const About: React.FC = () => {
     { name: 'User Experience', icon: Heart, color: 'linear-gradient(90deg, var(--color-primary), var(--color-accent))' },
   ];
 
-  const technologies = [
+  const { data, isLoading } = usePortfolioData();
+  const technologies = data?.skills?.map((s: any) => s.name) || [
     "Python",
     "Java",
-    "C++",
-    "C",
     "JavaScript",
     "TypeScript",
-    "HTML",
-    "MySQL",
-    "Node.js",
-    "Firebase"
+    "React",
+    "Node.js"
   ];
 
   return (
@@ -38,6 +36,12 @@ const About: React.FC = () => {
           style={{ background: 'radial-gradient(circle, rgba(251,146,60,0.08) 0%, transparent 60%)' }}
         />
       </div>
+      
+      {isLoading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+          <Loader2 className="w-10 h-10 text-primary animate-spin" />
+        </div>
+      )}
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">

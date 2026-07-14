@@ -1,7 +1,20 @@
 import React, { useMemo } from 'react';
-import { Calendar, ExternalLink, Building, Globe, MapPin } from 'lucide-react';
-import { defaultInternships } from '../data/internships';
+import { Calendar, ExternalLink, Building, Globe, MapPin, Loader2 } from 'lucide-react';
+import { usePortfolioData } from '../hooks/usePortfolioData';
 import { Internship } from '../data/types';
+
+const normalizeInternship = (internship: Internship) => {
+  const skills = internship.skills ?? internship.technologies ?? [];
+  const title = internship.title ?? internship.role ?? 'Internship Experience';
+  const type = internship.type ?? (internship.location?.toLowerCase().includes('virtual') ? 'virtual' : 'offline');
+
+  return {
+    ...internship,
+    title,
+    skills,
+    type,
+  };
+};
 
 const TimelineNode = ({
   internship,
@@ -11,6 +24,8 @@ const TimelineNode = ({
   isLeft: boolean
 }) => {
   const isVirtual = internship.type === 'virtual';
+  const displayTitle = internship.title ?? internship.role ?? 'Internship Experience';
+  const displaySkills = internship.skills ?? internship.technologies ?? [];
 
   return (
     <div className={`relative flex flex-col md:flex-row justify-between items-center w-full mb-8 md:mb-12 ${isLeft ? 'md:flex-row-reverse' : ''} group`}>
@@ -96,13 +111,20 @@ const TimelineNode = ({
           </div>
 
           <h3 className="text-lg font-bold text-white mb-1.5 tracking-tight leading-snug">
-            {internship.title}
+            {displayTitle}
           </h3>
 
           <div className="flex items-center gap-2 mb-3">
             <Building size={14} style={{ color: 'var(--color-primary)' }} />
             <span className="text-xs font-medium" style={{ color: 'var(--color-muted)' }}>{internship.company}</span>
           </div>
+
+          {internship.location && (
+            <div className="flex items-center gap-2 mb-3">
+              <MapPin size={12} style={{ color: 'var(--color-primary)' }} />
+              <span className="text-xs font-medium" style={{ color: 'var(--color-muted)' }}>{internship.location}</span>
+            </div>
+          )}
 
           {/* Mobile date format */}
           <div className="md:hidden flex items-center gap-2 mb-3">
@@ -115,7 +137,7 @@ const TimelineNode = ({
           </p>
 
           <div className="flex flex-wrap gap-1.5">
-            {internship.skills.map((skill) => (
+            {displaySkills.map((skill) => (
               <span
                 key={skill}
                 className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide"
@@ -136,8 +158,11 @@ const TimelineNode = ({
 };
 
 const Internships: React.FC = () => {
+  const { data, isLoading, isError } = usePortfolioData();
+  const internships = (data?.experience || []).map(normalizeInternship);
+
   const sortedInternships = useMemo(() => {
-    return [...defaultInternships].sort((a, b) => {
+    return [...internships].sort((a, b) => {
       // Very basic date extraction assuming formats like "Jul 2025 - Sep 2025" or "Jul 2025"
       // We'll split by '-' and take the first part to get the start date
       const getStartDate = (duration: string) => {
@@ -151,7 +176,7 @@ const Internships: React.FC = () => {
 
       return getStartDate(a.duration) - getStartDate(b.duration);
     });
-  }, []);
+  }, [internships]);
 
   return (
     <section id="internships" className="py-24 relative surface-bg" style={{ overflow: 'hidden' }}>
@@ -170,6 +195,17 @@ const Internships: React.FC = () => {
           style={{ background: 'radial-gradient(circle, rgba(251,146,60,0.04) 0%, transparent 70%)', filter: 'blur(70px)' }}
         />
       </div>
+
+      {isLoading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+          <Loader2 className="w-10 h-10 text-primary animate-spin" />
+        </div>
+      )}
+      {isError && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+          <p className="text-red-500 font-bold">Failed to load internships.</p>
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 

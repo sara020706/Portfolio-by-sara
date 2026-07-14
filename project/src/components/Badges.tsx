@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, Loader2 } from 'lucide-react';
 
-import { defaultBadges } from '../data/badges';
+import { usePortfolioData } from '../hooks/usePortfolioData';
 import { Badge } from '../data/types';
 
 const brandTheme = (issuer: string) => {
@@ -219,7 +219,8 @@ const ArrowBtn = ({ dir, onClick }: { dir: 'left' | 'right'; onClick: () => void
 );
 
 const Badges: React.FC = () => {
-  const badges = defaultBadges;
+  const { data, isLoading, isError } = usePortfolioData();
+  const badges = data?.badges || [];
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = useCallback((dir: 'left' | 'right') => {
@@ -236,6 +237,17 @@ const Badges: React.FC = () => {
         <div style={{ position: 'absolute', top: '10%', right: '-8%', width: '420px', height: '420px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%)', filter: 'blur(40px)' }} />
         <div style={{ position: 'absolute', bottom: '5%', left: '-5%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(251,146,60,0.07) 0%, transparent 70%)', filter: 'blur(50px)' }} />
       </div>
+
+      {isLoading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+          <Loader2 className="w-10 h-10 text-primary animate-spin" />
+        </div>
+      )}
+      {isError && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+          <p className="text-red-500 font-bold">Failed to load badges.</p>
+        </div>
+      )}
 
       <div className="relative z-10 max-w-screen-xl mx-auto px-6 sm:px-8 lg:px-10">
         {/* Header */}

@@ -18,13 +18,16 @@ export interface Badge {
 }
 
 export interface Internship {
-    title: string;
+    title?: string;
+    role?: string;
     company: string;
     duration: string;
     description: string;
-    skills: string[];
-    certificate: string;
-    type: 'virtual' | 'offline';
+    skills?: string[];
+    technologies?: string[];
+    certificate?: string;
+    type?: 'virtual' | 'offline';
+    location?: string;
     color?: string;
 }
 

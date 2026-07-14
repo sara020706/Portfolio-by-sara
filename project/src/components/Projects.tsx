@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Github, ChevronLeft, ChevronRight, Globe, ExternalLink } from 'lucide-react';
-
-import { defaultProjects } from '../data/projects';
+import { Github, ChevronLeft, ChevronRight, Globe, ExternalLink, Loader2 } from 'lucide-react';
+import { usePortfolioData } from '../hooks/usePortfolioData';
 import { getDirectImageLink } from '../utils/imageUtils';
 
 const Projects: React.FC = () => {
+  const { data, isLoading, isError } = usePortfolioData();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const timerRef = useRef<any>(null);
-  const projects = defaultProjects;
+  const projects = data?.projects || [];
 
   const startTimer = useCallback(() => {
+    if (projects.length === 0) return;
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % projects.length);
@@ -76,6 +77,16 @@ const Projects: React.FC = () => {
       onMouseEnter={() => { setIsAutoPlaying(false); clearInterval(timerRef.current); }}
       onMouseLeave={() => { setIsAutoPlaying(true); startTimer(); }}
     >
+      {isLoading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+          <Loader2 className="w-10 h-10 text-primary animate-spin" />
+        </div>
+      )}
+      {isError && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+          <p className="text-red-500 font-bold">Failed to load projects.</p>
+        </div>
+      )}
       {/* Golden accent line divider at the top */}
       <div className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent)' }} />
       <div className="absolute inset-0 pointer-events-none">
