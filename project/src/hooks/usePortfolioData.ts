@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-// In production: raw GitHub URL. In dev: load from /content/portfolio.json served by Vite
-const PORTFOLIO_URL = import.meta.env.DEV
-  ? '/content/portfolio.json'
-  : `https://raw.githubusercontent.com/${import.meta.env.VITE_REPO_OWNER}/${import.meta.env.VITE_REPO_NAME}/main/content/portfolio.json`;
+// Load the deployed asset from the same origin in both dev and production.
+// Vite serves /content/portfolio.json locally, and the build copies the file into public/ for production.
+const PORTFOLIO_URL = '/content/portfolio.json';
 
 async function fetchPortfolioData() {
   const url = import.meta.env.DEV ? PORTFOLIO_URL : `${PORTFOLIO_URL}?t=${Date.now()}`;
