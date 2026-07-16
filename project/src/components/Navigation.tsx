@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { Menu, X, Sparkles } from 'lucide-react';
+import { usePortfolioData } from '../hooks/usePortfolioData';
 
 interface NavigationProps {
   activeSection: string;
 }
 
+const DEFAULT_RESUME_URL = 'https://drive.google.com/file/d/1Gaql01VDTz_ycqmLbcjINc4DFpKKbuHP/view?usp=sharing';
+
 const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { data } = usePortfolioData();
+  const resumeUrl = data?.profile?.resumeUrl || DEFAULT_RESUME_URL;
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -17,7 +22,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeSection }) => {
     { name: 'Badges', href: '#badges' },
     { name: 'Codolio', href: '#codolio' },
     { name: 'Contact', href: '#contact' },
-    { name: 'Resume', href: 'https://drive.google.com/file/d/1Gaql01VDTz_ycqmLbcjINc4DFpKKbuHP/view?usp=sharing', external: true },
+    { name: 'Resume', href: resumeUrl, external: true },
   ];
 
   const scrollToSection = (href: string) => {

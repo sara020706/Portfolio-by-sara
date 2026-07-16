@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, ExternalLink, Loader2 } from 'lucide-react';
 
 import { usePortfolioData } from '../hooks/usePortfolioData';
+import { useTilt } from '../hooks/useTilt';
 import { Badge } from '../data/types';
 
 const brandTheme = (issuer: string) => {
@@ -41,9 +42,11 @@ const brandTheme = (issuer: string) => {
 
 const BadgeCard = ({ badge }: { badge: Badge }) => {
   const theme = brandTheme(badge.issuer);
+  const tiltRef = useTilt<HTMLElement>(7);
 
   return (
     <article
+      ref={tiltRef}
       className="badge-card-item relative flex-shrink-0 flex flex-col justify-between select-none group"
       style={{
         width: '320px',
@@ -329,12 +332,9 @@ const Badges: React.FC = () => {
         .no-scroll-bar::-webkit-scrollbar { display: none; }
 
         .badge-card-item {
-          transform: translateZ(0);
-          will-change: transform;
-          transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
+          transition: box-shadow 0.3s ease, z-index 0s;
         }
         .badge-card-item:hover {
-          transform: translateY(-8px) scale(1.02) translateZ(0);
           z-index: 10 !important;
           box-shadow: 0 20px 48px var(--card-glow, rgba(245,158,11,0.35)), 0 4px 16px rgba(0,0,0,0.4) !important;
         }

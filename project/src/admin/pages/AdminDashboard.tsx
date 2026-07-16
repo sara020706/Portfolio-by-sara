@@ -9,6 +9,7 @@ import CertificationsManager from './CertificationsManager';
 import SkillsManager from './SkillsManager';
 import BadgesManager from './BadgesManager';
 import ExperienceManager from './ExperienceManager';
+import ProfileManager from './ProfileManager';
 
 function DashboardLayout() {
   const { token } = useAuth();
@@ -28,6 +29,7 @@ function DashboardLayout() {
           <Route path="/skills" element={<SkillsManager />} />
           <Route path="/badges" element={<BadgesManager />} />
           <Route path="/internships" element={<ExperienceManager />} />
+          <Route path="/profile" element={<ProfileManager />} />
         </Routes>
       </main>
     </div>

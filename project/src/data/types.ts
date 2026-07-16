@@ -1,3 +1,7 @@
+export interface Profile {
+    resumeUrl: string;
+}
+
 export interface Certification {
     title: string;
     issuer: string;

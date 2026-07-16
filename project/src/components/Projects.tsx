@@ -1,7 +1,120 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Github, ChevronLeft, ChevronRight, Globe, ExternalLink, Loader2 } from 'lucide-react';
 import { usePortfolioData } from '../hooks/usePortfolioData';
+import { useTilt } from '../hooks/useTilt';
 import { getDirectImageLink } from '../utils/imageUtils';
+
+const ProjectCard: React.FC<{
+  project: any;
+  index: number;
+  layout: { top: string; left: string; width: string; height: string; opacity: number; zIndex: number };
+  isSpotlight: boolean;
+  isMedium: boolean;
+  isCompact: boolean;
+  isHidden: boolean;
+  isLastCompact: boolean;
+  extraCount: number;
+  onSelect: () => void;
+}> = ({ project, layout, isSpotlight, isMedium, isCompact, isHidden, isLastCompact, extraCount, onSelect }) => {
+  const tiltRef = useTilt<HTMLDivElement>(isSpotlight ? 5 : 0);
+
+  return (
+    <div
+      ref={isSpotlight ? tiltRef : undefined}
+      onClick={onSelect}
+      className={`absolute rounded-3xl overflow-hidden cursor-pointer border flex flex-col group
+        ${isSpotlight ? 'border-primary/30 shadow-[0_0_50px_rgba(245,158,11,0.07)] transition-[top,left,width,height,opacity,box-shadow] duration-700 ease-in-out' : 'border-white/5 hover:border-primary/20 transition-all duration-700 ease-in-out'}
+        ${isHidden ? 'pointer-events-none' : ''}
+      `}
+      style={{
+        top: layout.top,
+        left: layout.left,
+        width: layout.width,
+        height: layout.height,
+        opacity: layout.opacity,
+        zIndex: layout.zIndex,
+      }}
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src={getDirectImageLink(project.image)}
+          alt={project.title}
+          referrerPolicy="no-referrer"
+          className={`w-full h-full object-cover transition-all duration-700
+            ${isSpotlight ? 'group-hover:scale-105 opacity-100' : 'opacity-40 group-hover:opacity-60'}
+            ${isCompact ? 'opacity-20' : ''}
+          `}
+        />
+        <div className={`absolute inset-0 transition-opacity duration-700
+          ${isSpotlight ? 'bg-gradient-to-t from-black/95 via-black/55 to-black/10' : 'bg-black/70'}
+          ${isMedium ? 'bg-gradient-to-t from-black/80 to-transparent' : ''}
+          ${isCompact ? 'bg-gradient-to-t from-black/90 to-black/50' : ''}
+        `} />
+      </div>
+
+      {/* Spotlight Content (Shows only when slotIndex === 0) */}
+      <div className={`absolute inset-0 p-8 sm:p-10 flex flex-col justify-end transition-opacity duration-500 delay-200
+        ${isSpotlight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="mb-4">
+          <span className="text-xs font-bold text-primary uppercase tracking-widest">Spotlight</span>
+        </div>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.tags.slice(0, 3).map((tag: string) => (
+            <span key={tag} className="text-[10px] font-semibold text-primary/80 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 leading-tight tracking-tight">
+          {project.title}
+        </h3>
+        <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-md line-clamp-3">
+          {project.description}
+        </p>
+        <div className="flex items-center gap-3">
+          <a href={project.live} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="btn-primary px-6 py-3 rounded-xl flex items-center gap-2 font-bold text-xs hover:gap-3 transition-all active:scale-95">
+            View Live <ExternalLink size={14} />
+          </a>
+          <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="p-3 rounded-xl bg-white/10 border border-white/10 text-white hover:bg-white/20 transition-all">
+            <Github size={16} />
+          </a>
+        </div>
+      </div>
+
+      {/* Medium Card Content */}
+      <div className={`absolute inset-0 p-6 flex flex-col justify-between transition-opacity duration-500
+        ${isMedium ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="mb-4">
+          <span className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{project.tags[0]}</span>
+        </div>
+        <div>
+          <h4 className="text-lg font-bold text-white mb-1.5">{project.title}</h4>
+          <p className="text-gray-400 text-[11px] line-clamp-2 leading-relaxed">{project.description}</p>
+        </div>
+      </div>
+
+      {/* Compact Card Content */}
+      <div className={`absolute inset-0 p-4 flex flex-col justify-between transition-opacity duration-500
+        ${isCompact ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="mb-2">
+          <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider">{project.tags[0]}</span>
+        </div>
+        <div>
+          <h5 className="text-xs font-bold text-white tracking-tight truncate">{project.title}</h5>
+        </div>
+      </div>
+
+      {/* Plus N More Badge (Only for the last COMPACT slot if there are more) */}
+      {isLastCompact && (
+        <div className="absolute inset-0 bg-primary/10 backdrop-blur-sm flex flex-col items-center justify-center gap-1 group-hover:bg-primary/20 transition-all">
+          <span className="text-2xl font-black text-primary">+{extraCount}</span>
+          <span className="text-[9px] text-primary/60 font-bold uppercase tracking-widest">Queue</span>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Projects: React.FC = () => {
   const { data, isLoading, isError } = usePortfolioData();
@@ -142,111 +255,29 @@ const Projects: React.FC = () => {
             // Calculate slot index based on activeIndex
             // 0 = spotlight, 1 = med, 2 = comp1, 3 = comp2
             // We want it to cycle.
-            let slotIndex = (index - activeIndex + projects.length) % projects.length;
+            const slotIndex = (index - activeIndex + projects.length) % projects.length;
 
-            // If it just exited (was spotlight at last index), make it -1 for exit animation
-            // This is tricky with simple math. Let's just use the current slot.
             const layout = getSlotLayout(slotIndex);
             const isSpotlight = slotIndex === 0;
             const isMedium = slotIndex === 1;
             const isCompact = slotIndex === 2 || slotIndex === 3;
             const isHidden = slotIndex > 3 || slotIndex < 0;
+            const isLastCompact = slotIndex === 3 && projects.length > 4;
 
             return (
-              <div
+              <ProjectCard
                 key={index}
-                onClick={() => handleSelect(index)}
-                className={`absolute transition-all duration-700 ease-in-out rounded-3xl overflow-hidden cursor-pointer border flex flex-col group
-                  ${isSpotlight ? 'border-primary/30 shadow-[0_0_50px_rgba(245,158,11,0.07)]' : 'border-white/5 hover:border-primary/20'}
-                  ${isHidden ? 'pointer-events-none' : ''}
-                `}
-                style={{
-                  top: layout.top,
-                  left: layout.left,
-                  width: layout.width,
-                  height: layout.height,
-                  opacity: layout.opacity,
-                  zIndex: layout.zIndex,
-                }}
-              >
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <img
-                    src={getDirectImageLink(project.image)}
-                    alt={project.title}
-                    referrerPolicy="no-referrer"
-                    className={`w-full h-full object-cover transition-all duration-700
-                      ${isSpotlight ? 'group-hover:scale-105 opacity-100' : 'opacity-40 group-hover:opacity-60'}
-                      ${isCompact ? 'opacity-20' : ''}
-                    `}
-                  />
-                  <div className={`absolute inset-0 transition-opacity duration-700
-                    ${isSpotlight ? 'bg-gradient-to-t from-black/95 via-black/55 to-black/10' : 'bg-black/70'}
-                    ${isMedium ? 'bg-gradient-to-t from-black/80 to-transparent' : ''}
-                    ${isCompact ? 'bg-gradient-to-t from-black/90 to-black/50' : ''}
-                  `} />
-                </div>
-
-                {/* Spotlight Content (Shows only when slotIndex === 0) */}
-                <div className={`absolute inset-0 p-8 sm:p-10 flex flex-col justify-end transition-opacity duration-500 delay-200
-                  ${isSpotlight ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                  <div className="mb-4">
-                    <span className="text-xs font-bold text-primary uppercase tracking-widest">Spotlight</span>
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="text-[10px] font-semibold text-primary/80 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 leading-tight tracking-tight">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-md line-clamp-3">
-                    {project.description}
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <a href={project.live} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="btn-primary px-6 py-3 rounded-xl flex items-center gap-2 font-bold text-xs hover:gap-3 transition-all active:scale-95">
-                      View Live <ExternalLink size={14} />
-                    </a>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="p-3 rounded-xl bg-white/10 border border-white/10 text-white hover:bg-white/20 transition-all">
-                      <Github size={16} />
-                    </a>
-                  </div>
-                </div>
-
-                {/* Medium Card Content */}
-                <div className={`absolute inset-0 p-6 flex flex-col justify-between transition-opacity duration-500
-                  ${isMedium ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                  <div className="mb-4">
-                    <span className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{project.tags[0]}</span>
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-white mb-1.5">{project.title}</h4>
-                    <p className="text-gray-400 text-[11px] line-clamp-2 leading-relaxed">{project.description}</p>
-                  </div>
-                </div>
-
-                {/* Compact Card Content */}
-                <div className={`absolute inset-0 p-4 flex flex-col justify-between transition-opacity duration-500
-                  ${isCompact ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                  <div className="mb-2">
-                    <span className="text-[9px] text-gray-500 font-bold uppercase tracking-wider">{project.tags[0]}</span>
-                  </div>
-                  <div>
-                    <h5 className="text-xs font-bold text-white tracking-tight truncate">{project.title}</h5>
-                  </div>
-                </div>
-
-                {/* Plus N More Badge (Only for the last COMPACT slot if there are more) */}
-                {slotIndex === 3 && projects.length > 4 && (
-                  <div className="absolute inset-0 bg-primary/10 backdrop-blur-sm flex flex-col items-center justify-center gap-1 group-hover:bg-primary/20 transition-all">
-                    <span className="text-2xl font-black text-primary">+{projects.length - 4}</span>
-                    <span className="text-[9px] text-primary/60 font-bold uppercase tracking-widest">Queue</span>
-                  </div>
-                )}
-              </div>
+                project={project}
+                index={index}
+                layout={layout}
+                isSpotlight={isSpotlight}
+                isMedium={isMedium}
+                isCompact={isCompact}
+                isHidden={isHidden}
+                isLastCompact={isLastCompact}
+                extraCount={projects.length - 4}
+                onSelect={() => handleSelect(index)}
+              />
             );
           })}
         </div>

@@ -9,7 +9,8 @@ import {
   Award,
   Building2,
   LogOut,
-  ChevronLeft
+  ChevronLeft,
+  User
 } from 'lucide-react';
 
 const links = [
@@ -19,6 +20,7 @@ const links = [
   { to: '/admin/skills',         icon: Code2,           label: 'Skills'         },
   { to: '/admin/badges',         icon: Award,           label: 'Badges'         },
   { to: '/admin/internships',    icon: Building2,       label: 'Experience'     },
+  { to: '/admin/profile',        icon: User,            label: 'Profile'        },
 ];
 
 export default function Sidebar() {

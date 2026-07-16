@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Calendar, ExternalLink, Building, Globe, MapPin, Loader2 } from 'lucide-react';
 import { usePortfolioData } from '../hooks/usePortfolioData';
+import { useTilt } from '../hooks/useTilt';
 import { Internship } from '../data/types';
 
 const normalizeInternship = (internship: Internship) => {
@@ -26,6 +27,7 @@ const TimelineNode = ({
   const isVirtual = internship.type === 'virtual';
   const displayTitle = internship.title ?? internship.role ?? 'Internship Experience';
   const displaySkills = internship.skills ?? internship.technologies ?? [];
+  const tiltRef = useTilt<HTMLDivElement>(6);
 
   return (
     <div className={`relative flex flex-col md:flex-row justify-between items-center w-full mb-8 md:mb-12 ${isLeft ? 'md:flex-row-reverse' : ''} group`}>
@@ -56,7 +58,8 @@ const TimelineNode = ({
       <div className="w-full pl-[4rem] md:pl-0 md:w-5/12 relative flex">
         {/* We use ms-auto for right-aligned cards to dock them closer to the center, and max-w to keep them compact */}
         <div
-          className={`relative rounded-xl p-5 sm:p-6 transition-all duration-500 hover:-translate-y-1.5 backdrop-blur-md w-full max-w-[420px] ${isLeft ? 'mr-auto' : 'ml-auto'}`}
+          ref={tiltRef}
+          className={`relative rounded-xl p-5 sm:p-6 transition-shadow duration-500 backdrop-blur-md w-full max-w-[420px] ${isLeft ? 'mr-auto' : 'ml-auto'}`}
           style={{
             background: 'rgba(17,24,39,0.7)',
             border: '1px solid rgba(245,158,11,0.15)',

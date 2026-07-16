@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { FileText, ExternalLink, CheckCircle, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 
 import { usePortfolioData } from '../hooks/usePortfolioData';
+import { useTilt } from '../hooks/useTilt';
 import { Certification } from '../data/types';
 
 /* ─── Brand theme map ─────────────────────────────────────────────────── */
@@ -68,9 +69,11 @@ const brandTheme = (issuer: string): BrandTheme => {
 /* ─── Single Card ─────────────────────────────────────────────────────── */
 const CertCard: React.FC<{ cert: Certification }> = ({ cert }) => {
   const theme = brandTheme(cert.issuer);
+  const tiltRef = useTilt<HTMLElement>(7);
 
   return (
     <article
+      ref={tiltRef}
       className="cert-card-item relative flex-shrink-0 flex flex-col justify-between select-none"
       style={{
         width: '320px',
@@ -403,18 +406,12 @@ const Certifications: React.FC = () => {
       <style>{`
         .no-scroll-bar::-webkit-scrollbar { display: none; }
 
-        /* Card hover — only transform + box-shadow, both GPU-composited */
+        /* Tilt transform is applied inline by useTilt; only box-shadow/z-index here */
         .cert-card-item {
-          transform: translateZ(0);
-          will-change: transform;
-          transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s;
+          transition: box-shadow 0.3s ease, z-index 0s;
         }
         .cert-card-item:hover {
-          transform: translateY(-8px) scale(1.02) translateZ(0);
           z-index: 10 !important;
-        }
-        /* Individual glow colour per issuer — set via CSS custom property on element */
-        .cert-card-item:hover {
           box-shadow: 0 20px 48px var(--card-glow, rgba(245,158,11,0.35)), 0 4px 16px rgba(0,0,0,0.4) !important;
         }
       `}</style>
